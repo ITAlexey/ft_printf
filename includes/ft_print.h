@@ -5,15 +5,14 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 #include "libft.h"
+#include <stdarg.h>
 
 typedef struct		s_data_format
 {
 	int 			nbr_of_percent_signs;
 	int 			nbr_of_symbols;
-	//int 			pointer_offset;
+	char 			*width;
 	int 			nbr_of_printed_percentages;
-	//char 			*type_pattern; // [cspdiouxXf]
-	//char 			*width;
 	char 			*flag_type;
 	char 			*output;
 
@@ -21,7 +20,8 @@ typedef struct		s_data_format
 
 typedef struct		s_pattern
 {
-	char 			*flag_pattern; // [ +-#0]
+	char 			*flag; // [ +-#0]
+	char			*type; // [cspdiouxXf]
 }					t_pattern;
 
 void 				parse_format(char const *format, t_data_format *data, t_pattern *pattern);

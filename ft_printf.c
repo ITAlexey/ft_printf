@@ -2,7 +2,6 @@
 // Created by alexey on 10.08.2020.
 //
 
-#include <stdarg.h>
 #include "ft_printf.h"
 
 static void 	initialize_structures(t_data_format *data, t_pattern *pattern)
@@ -10,7 +9,8 @@ static void 	initialize_structures(t_data_format *data, t_pattern *pattern)
 	if (!(data = (t_data_format*)malloc(sizeof(data))) ||
 		!(pattern = (t_pattern*)malloc(sizeof(pattern))))
 		exit();
-	pattern->flag_pattern = " +-#0";
+	pattern->flag = " +-#0";
+	pattern->type = "cspdiouxXf";
 	data->nbr_of_symbols = 0;
 }
 
@@ -28,8 +28,11 @@ int 			ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			parse_format(format);
-			nbr = va_arg(ap, int);
+			parse_format(format, data, pattern, ap);
+			ft_putstr(data->output);
+			//print_percents(data->nbf_of_printed_percentages);
+			//if (flag == TRUE)
+				//ft_putstr(data->output);
 			/*
 			 * FORMAT: %[nbr of %][flags][width][precisely][size][type]
 			 * PERCENTAGES: check number of them.
@@ -43,8 +46,8 @@ int 			ft_printf(const char *format, ...)
 		else {
 			ft_putchar(*format);
 			format++;
+			data->nbr_of_symbols += 1;
 		}
-		data->nbr_of_symbols += 1;
 	}
 	//free(my_struct)
 	va_end(ap);

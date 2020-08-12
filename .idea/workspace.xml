@@ -18,12 +18,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d79ed44-a99b-4c7b-a238-a48f03ec3a18" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/flags.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ft_printf.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/includes/ft_print.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsing.c" afterDir="false" />
+    <list default="true" id="9d79ed44-a99b-4c7b-a238-a48f03ec3a18" name="Default Changelist" comment="almost process flag type -, wrote makefile and header. Next step is processing types.">
+      <change afterPath="$PROJECT_DIR$/generate_output.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flags.c" beforeDir="false" afterPath="$PROJECT_DIR$/flags.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ft_printf.c" beforeDir="false" afterPath="$PROJECT_DIR$/ft_printf.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/ft_print.h" beforeDir="false" afterPath="$PROJECT_DIR$/includes/ft_print.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +60,13 @@
       <recent name="$PROJECT_DIR$/includes" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -65,8 +76,16 @@
       <option name="presentableId" value="Default" />
       <updated>1597044889579</updated>
       <workItem from="1597044892570" duration="15291000" />
-      <workItem from="1597065424257" duration="11199000" />
+      <workItem from="1597065424257" duration="25005000" />
     </task>
+    <task id="LOCAL-00001" summary="almost process flag type -, wrote makefile and header. Next step is processing types.">
+      <created>1597077392448</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1597077392448</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,7 +103,19 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="almost process flag type -, wrote makefile and header. Next step is processing types." />
+    <option name="LAST_COMMIT_MESSAGE" value="almost process flag type -, wrote makefile and header. Next step is processing types." />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="278" y="112" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1597077426280">
+      <screen x="0" y="27" width="1366" height="700" />
+    </state>
+    <state x="278" y="112" width="800" height="528" key="Vcs.Push.Dialog.v2/0.27.1366.700@0.27.1366.700" timestamp="1597077426280" />
+    <state x="346" y="48" width="672" height="678" key="search.everywhere.popup" timestamp="1597242064685">
+      <screen x="0" y="27" width="1366" height="700" />
+    </state>
+    <state x="346" y="48" width="672" height="678" key="search.everywhere.popup/0.27.1366.700@0.27.1366.700" timestamp="1597242064685" />
     <state x="408" y="290" width="540" height="172" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1597074659474">
       <screen x="0" y="27" width="1366" height="700" />
     </state>

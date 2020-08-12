@@ -4,10 +4,13 @@
 
 #include "ft_printf.h"
 
-static char	 	*record_output(char *output, char *src, size_t size)
+static char	 	*record_output(char *output, char *src, char *size)
 {
-	data-output = ft_strnew(data->width);
-	return (ft_strcnpy(data->output, arg, arg_len));
+	int 	nbr;
+
+	nbr = ft_atoi(size);
+	output = ft_strnew(nbr);
+	return (ft_strncpy(output, src, nbr));
 }
 
 static void 	left_alignment(t_data_format *data, char *arg)

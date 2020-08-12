@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "ft_printf.h"
+//#include "ft_printf.h"
 
 int 	main(void){
 	// percentage test:
@@ -18,6 +18,9 @@ int 	main(void){
 	printf("%-2c\n", 'h');
 	printf("%-2s\n", "test flag: -");
 	printf("%-s\n", NULL);*/
-	ft_printf("hello%-d", 13);
+	//ft_printf("hello%-d", 13);
+	printf("%+10.", 13.25);
+	printf("%+10.");
+	printf("hello%+10.");
 	return 0;
 }
