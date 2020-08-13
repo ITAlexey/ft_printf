@@ -27,7 +27,7 @@ static void 	left_alignment(t_data_format *data, char *arg)
 	{
 		record_output(data->output, arg, data->width);
 		tmp = data->output;
-		ft_memset((char*)(tmp + arg_len), ' ', ABS(diff));
+		ft_memset((char*)(tmp + arg_len), ' ', ABC(diff));
 	}
 }
 

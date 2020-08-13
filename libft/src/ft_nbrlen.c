@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshala   <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dshala <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/04 19:23:26 by dshala            #+#    #+#             */
-/*   Updated: 2020/08/16 15:17:37 by dshala           ###   ########.fr       */
+/*   Created: 2020/08/15 13:10:00 by dshala            #+#    #+#             */
+/*   Updated: 2020/08/15 15:07:37 by dshala           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #define POS 0
 #define NEG 1
 
-int 	ft_nbrlen(int nbr)
+int		ft_nbrlen(int nbr)
 {
 	int	sign;
-	int len;
+	int	len;
 
 	if (nbr == 0)
 		return (1);
