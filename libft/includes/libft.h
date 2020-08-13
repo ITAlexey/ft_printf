@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # define ABC(c) ((c) < 0 ? -(c) : (c))
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define ISNULL(pointer) if ((pointer) == NULL) return (pointer)
 # define BUFF_SIZE 17
 
 typedef struct		s_list
@@ -28,6 +29,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char 				*char_to_string(char ch);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 int					ft_isalnum(int c);
@@ -51,6 +53,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dest, const void *src, size_t len);
 void				*ft_memset(void *b, int c, size_t len);
+int 				ft_nbrlen(int nbr);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putchar(char c);
 void				ft_putendl_fd(char const *s, int fd);
@@ -94,4 +97,6 @@ void				ft_swap(int *a, int *b);
 int					ft_is_prime(size_t nb);
 size_t				ft_count_words(const char *str, int c);
 int					get_next_line(int const fd, char **line);
+char 				*integer_to_string(int nbr);
+
 #endif

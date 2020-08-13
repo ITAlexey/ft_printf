@@ -3,7 +3,6 @@
 //
 #include "ft_printf.h"
 #define PERCENT 37
-#define ISNULL(pointer) if ((pointer) == NULL) return (pointer)
 
 static int 		get_nbr_of_percentages(char const *format)
 {
@@ -70,11 +69,11 @@ void 			parse_format(char const *format, t_data_format *data, t_pattern *pattern
 	symbols += data->nbr_of_percent_signs;
 	if (data->nbr_of_perecent_signs % 2 != 0)
 	{
-		data->flag_type = search_match(format, pattern->flag_pattern, symbols);
+		data->flag = search_match(format, pattern->flag, symbols);
 		data->width = get_width(format, symbols);
 		//data->precisly = define_pricesly(format);
 		//data->size = get_size(format);
-		data-type = search_match(format, pattern->type, symbols);
+		data->type = search_match(format, pattern->type, symbols);
 		generate_output(data, ap);
 	}
 }

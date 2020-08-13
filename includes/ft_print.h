@@ -9,11 +9,13 @@
 
 typedef struct		s_data_format
 {
-	int 			nbr_of_percent_signs;
 	int 			nbr_of_symbols;
-	char 			*width;
+	int 			nbr_of_percent_signs;
 	int 			nbr_of_printed_percentages;
-	char 			*flag_type;
+	char 			*width;
+	char 			*flag;
+	char 			*type;
+	char 			*argument;
 	char 			*output;
 
 }					t_data_format;
