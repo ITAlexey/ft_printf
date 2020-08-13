@@ -35,6 +35,8 @@ char 			*integer_to_string(int nbr)
 	int 	len;
 	char 	*str;
 
+	if (nbr == 0)
+		return (char_to_string('0'));
 	len = ft_nbrlen(nbr);
 	str = (char*)malloc(len + 1);
 	ISNULL(str);

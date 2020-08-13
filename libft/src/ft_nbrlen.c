@@ -19,6 +19,8 @@ int 	ft_nbrlen(int nbr)
 	int	sign;
 	int len;
 
+	if (nbr == 0)
+		return (1);
 	len = 0;
 	sign = nbr < 0 ? NEG : POS;
 	nbr = ABC(nbr);
