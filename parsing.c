@@ -21,10 +21,7 @@ static char		*record_matched_pattern(char const *format, int *symbols)
 {
 	char 	*to_string;
 
-	to_string = (char*)malloc(2); // allocated memory
-	ISNULL(to_string);
-	to_string[0] = *format;
-	to_string[1] = '\0';
+	to_string = char_to_string(*format);
 	*symbols += 1;
 	format++;
 	return (to_string);
@@ -71,6 +68,7 @@ void 			parse_format(char const *format, t_data_format *data, t_pattern *pattern
 	{
 		data->flag = search_match(format, pattern->flag, symbols);
 		data->width = get_width(format, symbols);
+		data->numeric_value_of_width = data->width == NULL ? 0 : ft_atoi(data->width);
 		//data->precisly = define_pricesly(format);
 		//data->size = get_size(format);
 		data->type = search_match(format, pattern->type, symbols);

@@ -4,40 +4,19 @@
 
 #include "ft_printf.h"
 
-char 	*character_to_string(char ch)
+static char 	*retrieve_according_type(t_data_format *data, char *type, va_list ap)
 {
-	char 	*string;
+	char	*string;
 
-	string = (char*)malloc(2);
-	ISNULL(string);
-	string[0] = ch;
-	string[1] = '\0';
-	return string;
-}
-
-static void 	retrieve_integer(t_data_format *data, int nbr)
-{
-
-}
-
-static void 	retrieve_string(t_data_format *data, char *str)
-{
-	data->argument = ft_strsub(str, 0, ft_strlen(str)); // allocate memory
-}
-
-static void 	retrieve_char(t_data_format *data, char ch)
-{
-	character_to_string(ch);
-}
-
-static void 	retrieve_arg_by_the_type(t_data_format *data, char *type, va_list ap)
-{
 	if (ft_strequ(type, "d"))
-		 retrieve_integer(data, va_arg(ap, int)); // beta returned value
+		 return (integer_to_string(va_arg(ap, int)));
 	else if (ft_strequ(type, "c"))
-		retrieve_char(data, va_arg(ap, char));
+		return (char_to_string(va_arg(ap, char)));
 	else if (ft_strequ(type, "s"))
-		retrieve_string(data, va_arg(ap, char*));
+	{
+		string = va_arg(ap, char*);
+		return (ft_strsub(string, 0, ft_strlen(string)));
+	}
 	/*else if (ft_strequ(type, "p"))
 		retrieve_pointer(data, va_arg(ap, char*));
 	else if (ft_strequ(type, "i"))
@@ -54,12 +33,16 @@ static void 	retrieve_arg_by_the_type(t_data_format *data, char *type, va_list a
 		return;*/
 }
 
+static void 	apply_specifiers_to_arg(t_data_format *data, char *arg)
+{
+	process_flag(data, data->flag, arg);
+}
+
 void 	generate_output(t_data_format *data, va_list ap)
 {
 	if (data->type != NULL)
 	{
-		// types: char. int, char *
-		retrieve_arg_by_the_type(data, data->type, va_list ap);
-		//process_flags();
+		data->argument = retrieve_according_type(data, data->type, va_list ap); // argument is recorded
+		apply_specifiers_to_arg(data, data->argument);
 	}
 }

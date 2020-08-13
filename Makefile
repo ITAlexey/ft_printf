@@ -16,10 +16,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIB = libft/libft.a
 
-INC = includes
+INC = inc
 
-all: obj_dir $(LIB) $(NAME)
+all: $(NAME)
+
+$(NAME): obj_dir $(LIB) $(OBJ)
 		$(CC) $(OBJ) -L$(dir $(LIB)) -lft -o $(NAME)
+
+$(OBJ_DIR)/%.o: %.c $(INC) libft/includes
+		$(CC) $(CFLAGS) -o $@ -c $< -I$(INC) -I$(addsuffix $(INC)ludes, $(dir LIB))
 
 obj_dir:
 		mkdir -p $(OBJ_DIR)
@@ -27,11 +32,6 @@ obj_dir:
 $(LIB): 
 		make -sC $(dir $(LIB))
 
-$(NAME): $(OBJ)
-		$(CC) $(OBJ) -o $@
-
-$(OBJ_DIR)/%.o: %.c $(INC)
-		$(CC) $(CFLAGS) -c $< -o $@ -I$(INC)
 
 clean:
 		rm -rf $(OBJ_DIR)

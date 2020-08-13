@@ -3,24 +3,17 @@
 //
 
 #include <stdio.h>
-//#include "ft_printf.h"
+#include "ft_printf.h"
 
 int 	main(void){
-	// percentage test:
-	//printf("%%", 123);
-	//flags test:
+	printf("---My function---\n");
+	ft_printf("%-d\n", 10);
+	ft_printf("%-d\n", 0);
+	ft_printf("%-d\n", -10);
 
-	// check '-':
-	/*printf("%-d\n", 1);
-	printf("%-2d\n", -1);
-	printf("%-2d\n", 10);
-	printf("%-2d\n", -10);
-	printf("%-2c\n", 'h');
-	printf("%-2s\n", "test flag: -");
-	printf("%-s\n", NULL);*/
-	//ft_printf("hello%-d", 13);
-	printf("%+10.", 13.25);
-	printf("%+10.");
-	printf("hello%+10.");
+	printf("\n---Std function---\n");
+	printf("%-d", 10);
+	printf("%-d\n", 0);
+	printf("%-d\n", -10);
 	return 0;
 }

@@ -8,10 +8,11 @@ static void 	initialize_structures(t_data_format *data, t_pattern *pattern)
 {
 	if (!(data = (t_data_format*)malloc(sizeof(data))) ||
 		!(pattern = (t_pattern*)malloc(sizeof(pattern))))
-		exit();
+		exit(0);
 	pattern->flag = " +-#0";
 	pattern->type = "cspdiouxXf";
 	data->nbr_of_symbols = 0;
+	data->output = NULL;
 }
 
 int 			ft_printf(const char *format, ...)
@@ -19,20 +20,17 @@ int 			ft_printf(const char *format, ...)
 	va_list			ap;
 	t_data_format	*data;
 	t_pattern		*pattern;
-	int 			nbr;
+	int 			symbols;
 
 	initialize_structures(data, pattern);
 	va_start(ap, format);
-	symbols_counter = 0;
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			parse_format(format, data, pattern, ap);
-			ft_putstr(data->output);
 			//print_percents(data->nbf_of_printed_percentages);
-			//if (flag == TRUE)
-				//ft_putstr(data->output);
+			ft_putstr(data->output);
 			/*
 			 * FORMAT: %[nbr of %][flags][width][precisely][size][type]
 			 * PERCENTAGES: check number of them.
@@ -49,9 +47,10 @@ int 			ft_printf(const char *format, ...)
 			data->nbr_of_symbols += 1;
 		}
 	}
+	symbols = data->nbr_of_symbols;
 	//free(my_struct)
 	va_end(ap);
-	return (symbols_counter);
+	return (symbols);
 }
 
 
