@@ -11,12 +11,14 @@ static char 	*retrieve_according_type(t_data_format *data, char *type, va_list a
 	if (ft_strequ(type, "d"))
 		 return (integer_to_string(va_arg(ap, int)));
 	else if (ft_strequ(type, "c"))
-		return (char_to_string(va_arg(ap, char)));
+		return (char_to_string(va_arg(ap, int)));
 	else if (ft_strequ(type, "s"))
 	{
 		string = va_arg(ap, char*);
 		return (ft_strsub(string, 0, ft_strlen(string)));
 	}
+	else
+		return (NULL);
 	/*else if (ft_strequ(type, "p"))
 		retrieve_pointer(data, va_arg(ap, char*));
 	else if (ft_strequ(type, "i"))
@@ -42,7 +44,7 @@ void 	generate_output(t_data_format *data, va_list ap)
 {
 	if (data->type != NULL)
 	{
-		data->argument = retrieve_according_type(data, data->type, va_list ap); // argument is recorded
+		data->argument = retrieve_according_type(data, data->type, ap); // argument is recorded
 		apply_specifiers_to_arg(data, data->argument);
 	}
 }

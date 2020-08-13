@@ -6,9 +6,6 @@
 
 static void 	initialize_structures(t_data_format *data, t_pattern *pattern)
 {
-	if (!(data = (t_data_format*)malloc(sizeof(data))) ||
-		!(pattern = (t_pattern*)malloc(sizeof(pattern))))
-		exit(0);
 	pattern->flag = " +-#0";
 	pattern->type = "cspdiouxXf";
 	data->nbr_of_symbols = 0;
@@ -22,6 +19,9 @@ int 			ft_printf(const char *format, ...)
 	t_pattern		*pattern;
 	int 			symbols;
 
+	if (!(data = (t_data_format*)malloc(sizeof(data))) ||
+		!(pattern = (t_pattern*)malloc(sizeof(pattern))))
+		exit(0);
 	initialize_structures(data, pattern);
 	va_start(ap, format);
 	while (*format != '\0')

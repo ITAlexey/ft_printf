@@ -4,9 +4,9 @@
 #include "ft_printf.h"
 #define PERCENT 37
 
-static int 		get_nbr_of_percentages(char const *format)
+static int		get_nbr_of_percentages(char const *format)
 {
-	int 	percent_counter;
+	int		percent_counter;
 
 	percent_counter = 0;
 	while (*format == PERCENT)
@@ -19,7 +19,7 @@ static int 		get_nbr_of_percentages(char const *format)
 
 static char		*record_matched_pattern(char const *format, int *symbols)
 {
-	char 	*to_string;
+	char	*to_string;
 
 	to_string = char_to_string(*format);
 	*symbols += 1;
@@ -29,10 +29,10 @@ static char		*record_matched_pattern(char const *format, int *symbols)
 
 static char 	*get_width(char const *format, int *symbols)
 {
-	char 	*end;
-	int 	diff;
+	char		*end;
+	int			diff;
 
-	end = format;
+	end = (char*)format;
 	while (ft_isdigit(*end) != 0)
 	{
 		*symbols += 1;
@@ -42,9 +42,9 @@ static char 	*get_width(char const *format, int *symbols)
 	return (diff == 0 ? NULL : ft_strsub(format, *symbols, diff)); //allocated memory
 }
 
-static char 		*search_match(char const *format, char *pattern, int *symbols)
+static char			*search_match(char const *format, char *pattern, int *symbols)
 {
-	char 	*pointer;
+	char	*pointer;
 
 	pointer = pattern;
 	while (*pointer != '\0')
@@ -64,7 +64,7 @@ void 			parse_format(char const *format, t_data_format *data, t_pattern *pattern
 	data->nbr_of_percent_signs = get_nbr_of_percentages(format);
 	data->nbr_of_printed_percentages = data->nbr_of_percent_signs / 2;
 	symbols += data->nbr_of_percent_signs;
-	if (data->nbr_of_perecent_signs % 2 != 0)
+	if (data->nbr_of_percent_signs % 2 != 0)
 	{
 		data->flag = search_match(format, pattern->flag, symbols);
 		data->width = get_width(format, symbols);
