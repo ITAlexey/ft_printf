@@ -9,10 +9,7 @@ static char 	*retrieve_according_type(t_data_format *data, char *type, va_list a
 	char	*string;
 
 	if (ft_strequ(type, "d"))
-	{
-		printf("GOOD?\n");
 		return (nbr_to_string((int) va_arg(ap, long long)));
-	}
 	else if (ft_strequ(type, "c"))
 		return (char_to_string(va_arg(ap, int)));
 	else if (ft_strequ(type, "s"))
@@ -48,6 +45,6 @@ void 	generate_output(t_data_format *data, va_list ap)
 	if (data->type != NULL)
 	{
 		data->argument = retrieve_according_type(data, data->type, ap); // argument is recorded
-		apply_specifiers_to_arg(data, data->argument);
+		//apply_specifiers_to_arg(data, data->argument);
 	}
 }

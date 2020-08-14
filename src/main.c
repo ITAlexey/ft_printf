@@ -7,7 +7,7 @@
 
 int 	main(void){
 	printf("---My function---\n");
-	ft_printf("%dhelloWOrld", 1234);
+	ft_printf("%d", 1234);
 	/*ft_printf("%-d\n", 10);
 	ft_printf("%-d\n", 0);
 	ft_printf("%-d\n", -10);*/

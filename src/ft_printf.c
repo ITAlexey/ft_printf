@@ -4,10 +4,10 @@
 
 #include "ft_printf.h"
 
-static void 	initialize_structures(t_data_format *data, t_pattern *pattern)
+static void 	initialize_structures(t_data_format *data)
 {
-	pattern->flag = " +-#0";
-	pattern->type = "cspdiouxXf";
+	//" +-#0"
+	//"cspdiouxXf"
 	data->nbr_of_symbols = 0;
 	data->output = NULL;
 }
@@ -16,21 +16,19 @@ int 			ft_printf(const char *format, ...)
 {
 	va_list			ap;
 	t_data_format	*data;
-	t_pattern		*pattern;
 	int 			symbols;
 
-	if (!(data = (t_data_format*)malloc(sizeof(data))) ||
-		!(pattern = (t_pattern*)malloc(sizeof(pattern))))
+	if (!(data = (t_data_format*)malloc(sizeof(t_data_format))))
 		exit(0);
-	initialize_structures(data, pattern);
+	initialize_structures(data);
 	va_start(ap, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
-			parse_format(&format, data, pattern, ap);
+			parse_format(&format, data, ap);
 			//print_percents(data->nbf_of_printed_percentages);
-			ft_putstr(data->output);
+			ft_putstr(data->argument);
 			/*
 			 * FORMAT: %[nbr of %][flags][width][precisely][size][type]
 			 * PERCENTAGES: check number of them.

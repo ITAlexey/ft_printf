@@ -54,17 +54,12 @@ static char			*search_match(char const **format, char *pattern, int *symbols)
 {
 	char	*pointer;
 
-	pointer = pattern;
-	while (*pointer != '\0')
-	{
-		if (*pointer == **format)
-			return (record_matched_pattern(format, symbols));
-		pointer++;
-	}
-	return (NULL);
+	if ((pointer = ft_strchr(pattern, **format)) != NULL)
+		return (record_matched_pattern(format, symbols));
+	return (pointer);
 }
 
-void 			parse_format(char const **format, t_data_format *data, t_pattern *pattern, va_list ap)
+void 			parse_format(char const **format, t_data_format *data, va_list ap)
 {
 	int		*symbols;
 
@@ -74,14 +69,14 @@ void 			parse_format(char const **format, t_data_format *data, t_pattern *patter
 	symbols += data->nbr_of_percent_signs;
 	if (data->nbr_of_percent_signs % 2 != 0)
 	{
-		data->flag = search_match(format, pattern->flag, symbols);
+		data->flag = search_match(format, " +-#0", symbols);
 		/*if (data->flag == NULL)
 			printf("YES\n");*/
 		data->width = get_width(format, symbols);
 		data->numeric_value_of_width = data->width == NULL ? 0 : ft_atoi(data->width);
 		//data->precisly = define_pricesly(format);
 		//data->size = get_size(format);
-		data->type = search_match(format, pattern->type, symbols);
+		data->type = search_match(format, "cspdiouxXf", symbols);
 		generate_output(data, ap);
 	}
 }
