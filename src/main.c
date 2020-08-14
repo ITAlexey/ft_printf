@@ -7,7 +7,13 @@
 
 int 	main(void){
 	printf("---My function---\n");
-	ft_printf("%d", 1234);
+	ft_printf("%d\n", -10);
+	ft_printf("%d\n", 0);
+	ft_printf("%d\n", 10);
+	ft_printf("%before d\n", -10);
+	ft_printf("%d after\n", -10);
+	ft_printf("before and %d after\n", -10);
+	ft_printf("%d %d %d %d\n", 1, 10000, 3214, -5555);
 	/*ft_printf("%-d\n", 10);
 	ft_printf("%-d\n", 0);
 	ft_printf("%-d\n", -10);*/

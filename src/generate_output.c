@@ -37,7 +37,10 @@ static char 	*retrieve_according_type(t_data_format *data, char *type, va_list a
 
 static void 	apply_specifiers_to_arg(t_data_format *data, char *arg)
 {
-	process_flag(data, data->flag, arg);
+	if (data->flag != NULL)
+		process_flag(data, data->flag, arg);
+	else
+		data->output = ft_strsub(data->argument, 0, ft_strlen(data->argument));
 }
 
 void 	generate_output(t_data_format *data, va_list ap)
@@ -45,6 +48,6 @@ void 	generate_output(t_data_format *data, va_list ap)
 	if (data->type != NULL)
 	{
 		data->argument = retrieve_according_type(data, data->type, ap); // argument is recorded
-		//apply_specifiers_to_arg(data, data->argument);
+		apply_specifiers_to_arg(data, data->argument);
 	}
 }
