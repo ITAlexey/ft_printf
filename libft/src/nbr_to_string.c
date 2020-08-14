@@ -14,9 +14,9 @@
 #define NEG 1
 #define POS 0
 
-static char		*nbrcpy(char *dest, int nbr, int len)
+static char		*nbrcpy(char *dest, long long nbr, int len)
 {
-	int	sign;
+	short	sign;
 
 	sign = nbr < 0 ? NEG : POS;
 	nbr = ABC(nbr);
@@ -30,10 +30,10 @@ static char		*nbrcpy(char *dest, int nbr, int len)
 	return (dest);
 }
 
-char			*integer_to_string(int nbr)
+char			*nbr_to_string(long long nbr)
 {
-	int		len;
-	char	*str;
+	int			len;
+	char		*str;
 
 	if (nbr == 0)
 		return (char_to_string('0'));

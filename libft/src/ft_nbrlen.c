@@ -14,10 +14,10 @@
 #define POS 0
 #define NEG 1
 
-int		ft_nbrlen(int nbr)
+int		ft_nbrlen(long long nbr)
 {
-	int	sign;
-	int	len;
+	short	sign;
+	int		len;
 
 	if (nbr == 0)
 		return (1);

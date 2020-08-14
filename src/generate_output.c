@@ -9,7 +9,10 @@ static char 	*retrieve_according_type(t_data_format *data, char *type, va_list a
 	char	*string;
 
 	if (ft_strequ(type, "d"))
-		 return (integer_to_string(va_arg(ap, int)));
+	{
+		printf("GOOD?\n");
+		return (nbr_to_string((int) va_arg(ap, long long)));
+	}
 	else if (ft_strequ(type, "c"))
 		return (char_to_string(va_arg(ap, int)));
 	else if (ft_strequ(type, "s"))

@@ -4,59 +4,67 @@
 #include "ft_printf.h"
 #define PERCENT 37
 
-static int		get_nbr_of_percentages(char const *format)
+static int		get_nbr_of_percentages(char const **format)
 {
 	int		percent_counter;
 
 	percent_counter = 0;
-	while (*format == PERCENT)
+	while (**format == PERCENT)
 	{
 		percent_counter++;
-		format++;
+		(*format)++;
 	}
 	return (percent_counter);
 }
 
-static char		*record_matched_pattern(char const *format, int *symbols)
+static char		*record_matched_pattern(char const **format, int *symbols)
 {
 	char	*to_string;
 
-	to_string = char_to_string(*format);
+	to_string = char_to_string(**format);
+	(*format)++;
 	*symbols += 1;
-	format++;
 	return (to_string);
 }
 
-static char 	*get_width(char const *format, int *symbols)
+static char 	*get_width(char const **format, int *symbols)
 {
 	char		*end;
+	char 		*width;
 	int			diff;
 
-	end = (char*)format;
+	end = (char*)(*format);
 	while (ft_isdigit(*end) != 0)
 	{
 		*symbols += 1;
 		end++;
 	}
-	diff = end - format;
-	return (diff == 0 ? NULL : ft_strsub(format, *symbols, diff)); //allocated memory
+	diff = end - *format;
+	if (diff == 0)
+		return (NULL);
+	else
+	{
+		width = ft_strsub(*format, *symbols, diff);
+		*format += diff;
+		return (width);
+	}
 }
 
-static char			*search_match(char const *format, char *pattern, int *symbols)
+static char			*search_match(char const **format, char *pattern, int *symbols)
 {
 	char	*pointer;
 
 	pointer = pattern;
 	while (*pointer != '\0')
 	{
-		if (*pointer == *format)
+		if (*pointer == **format)
 			return (record_matched_pattern(format, symbols));
 		pointer++;
 	}
 	return (NULL);
 }
 
-void 			parse_format(char const *format, t_data_format *data, t_pattern *pattern, va_list ap)
+void 			parse_format(char const **format, t_data_format *data, t_pattern *pattern, va_list ap)
 {
 	int		*symbols;
 
@@ -67,6 +75,8 @@ void 			parse_format(char const *format, t_data_format *data, t_pattern *pattern
 	if (data->nbr_of_percent_signs % 2 != 0)
 	{
 		data->flag = search_match(format, pattern->flag, symbols);
+		/*if (data->flag == NULL)
+			printf("YES\n");*/
 		data->width = get_width(format, symbols);
 		data->numeric_value_of_width = data->width == NULL ? 0 : ft_atoi(data->width);
 		//data->precisly = define_pricesly(format);

@@ -7,13 +7,14 @@
 
 int 	main(void){
 	printf("---My function---\n");
-	ft_printf("%-d\n", 10);
+	ft_printf("%dhelloWOrld", 1234);
+	/*ft_printf("%-d\n", 10);
 	ft_printf("%-d\n", 0);
-	ft_printf("%-d\n", -10);
-
+	ft_printf("%-d\n", -10);*/
+/*
 	printf("\n---Std function---\n");
 	printf("%-d", 10);
 	printf("%-d\n", 0);
-	printf("%-d\n", -10);
+	printf("%-d\n", -10);*/
 	return 0;
 }

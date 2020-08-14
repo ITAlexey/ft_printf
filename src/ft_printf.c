@@ -28,7 +28,7 @@ int 			ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			parse_format(format, data, pattern, ap);
+			parse_format(&format, data, pattern, ap);
 			//print_percents(data->nbf_of_printed_percentages);
 			ft_putstr(data->output);
 			/*

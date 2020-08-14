@@ -53,7 +53,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dest, const void *src, size_t len);
 void				*ft_memset(void *b, int c, size_t len);
-int					ft_nbrlen(int nbr);
+int					ft_nbrlen(long long nbr);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putchar(char c);
 void				ft_putendl_fd(char const *s, int fd);
@@ -97,6 +97,6 @@ void				ft_swap(int *a, int *b);
 int					ft_is_prime(size_t nb);
 size_t				ft_count_words(const char *str, int c);
 int					get_next_line(int const fd, char **line);
-char				*integer_to_string(int nbr);
+char				*nbr_to_string(long long nbr);
 
 #endif

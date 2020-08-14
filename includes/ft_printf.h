@@ -27,7 +27,7 @@ typedef struct		s_pattern
 	char			*type; // [cspdiouxXf]
 }					t_pattern;
 
-void				parse_format(char const *format, t_data_format *data, t_pattern *pattern, va_list ap);
+void				parse_format(char const **format, t_data_format *data, t_pattern *pattern, va_list ap);
 void				generate_output(t_data_format *data, va_list ap);
 void				process_flag(t_data_format *data, char *flag, char *arg);
 int					ft_printf(char const *format, ...);
