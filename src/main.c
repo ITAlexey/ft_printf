@@ -22,7 +22,7 @@
 
 int 	main(void){
 	printf("---My function---\n");
-	ft_printf("%-2d\n", 0);
+	ft_printf("%-10d\n", 0);
 	/*ft_printf("%-2d\n", -0);
 	ft_printf("%-2d\n", +0);
 	ft_printf("%-2d\n", 10);

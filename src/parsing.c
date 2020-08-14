@@ -36,7 +36,7 @@ static char 	*get_width(char const **format)
 	while (ft_isdigit(*end) != 0)
 		end++;
 	diff = end - *format;
-	if (diff)
+	if (diff == 0)
 		return (NULL);
 	else
 	{
