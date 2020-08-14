@@ -4,11 +4,6 @@
 
 #include "ft_printf.h"
 
-static void 	initialize_structures(t_data_format *data)
-{
-	data->output = NULL;
-}
-
 int 			ft_printf(const char *format, ...)
 {
 	va_list			ap;
@@ -18,7 +13,7 @@ int 			ft_printf(const char *format, ...)
 	res = 0;
 	if (!(data = (t_data_format*)malloc(sizeof(t_data_format))))
 		exit(0);
-	initialize_structures(data);
+	data->output = NULL;
 	va_start(ap, format);
 	while (*format != '\0')
 	{
@@ -31,7 +26,7 @@ int 			ft_printf(const char *format, ...)
 			res++;
 		}
 	}
-	//free(my_struct)
+	free(data);
 	va_end(ap);
 	return (res);
 }
