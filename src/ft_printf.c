@@ -15,6 +15,7 @@ int 			ft_printf(const char *format, ...)
 	t_data_format	*data;
 	int 			res;
 
+	res = 0;
 	if (!(data = (t_data_format*)malloc(sizeof(t_data_format))))
 		exit(0);
 	initialize_structures(data);
