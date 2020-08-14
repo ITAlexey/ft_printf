@@ -17,17 +17,16 @@ static int		get_nbr_of_percentages(char const **format)
 	return (percent_counter);
 }
 
-static char		*record_matched_pattern(char const **format, int *symbols)
+static char		*record_matched_pattern(char const **format)
 {
 	char	*to_string;
 
 	to_string = char_to_string(**format);
 	(*format)++;
-	*symbols += 1;
 	return (to_string);
 }
 
-static char 	*get_width(char const **format, int *symbols)
+static char 	*get_width(char const **format)
 {
 	char		*end;
 	char 		*width;
@@ -35,48 +34,50 @@ static char 	*get_width(char const **format, int *symbols)
 
 	end = (char*)(*format);
 	while (ft_isdigit(*end) != 0)
-	{
-		*symbols += 1;
 		end++;
-	}
 	diff = end - *format;
-	if (diff == 0)
+	if (diff)
 		return (NULL);
 	else
 	{
-		width = ft_strsub(*format, *symbols, diff);
+		width = ft_strsub(*format, 0, diff);
 		*format += diff;
 		return (width);
 	}
 }
 
-static char			*search_match(char const **format, char *pattern, int *symbols)
+static char			*search_match(char const **format, char *pattern)
 {
 	char	*pointer;
 
 	if ((pointer = ft_strchr(pattern, **format)) != NULL)
-		return (record_matched_pattern(format, symbols));
+		return (record_matched_pattern(format));
 	return (pointer);
 }
 
-void 			parse_format(char const **format, t_data_format *data, va_list ap)
+int 		print_percents(int times)
 {
-	int		*symbols;
+	int	tmp;
 
-	symbols = &(data->nbr_of_symbols);
-	data->nbr_of_percent_signs = get_nbr_of_percentages(format);
-	data->nbr_of_printed_percentages = data->nbr_of_percent_signs / 2;
-	symbols += data->nbr_of_percent_signs;
-	if (data->nbr_of_percent_signs % 2 != 0)
+	tmp = times;
+	while (tmp)
 	{
-		data->flag = search_match(format, " +-#0", symbols);
-		/*if (data->flag == NULL)
-			printf("YES\n");*/
-		data->width = get_width(format, symbols);
-		data->numeric_value_of_width = data->width == NULL ? 0 : ft_atoi(data->width);
-		//data->precisly = define_pricesly(format);
-		//data->size = get_size(format);
-		data->type = search_match(format, "cspdiouxXf", symbols);
-		generate_output(data, ap);
+		ft_putchar(PERCENT);
+		tmp--;
 	}
+	return (times);
+}
+
+int			parse_format(char const **format, t_data_format *data, va_list ap)
+{
+	data->percentages = get_nbr_of_percentages(format);
+	if (data->percentages % 2 != 0)
+	{
+		data->flag = search_match(format, " +-#0");
+		data->width = get_width(format);
+		data->numeric_value_of_width = data->width == NULL ? 0 : ft_atoi(data->width);
+		data->type = search_match(format, "cspdiouxXf");
+		return (generate_output(data, ap));
+	}
+	return (print_percents(data->percentages / 2));
 }

@@ -9,9 +9,7 @@
 
 typedef struct		s_data_format
 {
-	int				nbr_of_symbols;
-	int				nbr_of_percent_signs;
-	int				nbr_of_printed_percentages;
+	int				percentages;
 	char			*width;
 	int				numeric_value_of_width;
 	char			*flag;
@@ -21,9 +19,10 @@ typedef struct		s_data_format
 
 }					t_data_format;
 
-void				parse_format(char const **format, t_data_format *data, va_list ap);
-void				generate_output(t_data_format *data, va_list ap);
+int					parse_format(char const **format, t_data_format *data, va_list ap);
+int					generate_output(t_data_format *data, va_list ap);
 void				process_flag(t_data_format *data, char *flag, char *arg);
 int					ft_printf(char const *format, ...);
+int 				print_percents(int times);
 
 #endif

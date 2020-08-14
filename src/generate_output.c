@@ -43,11 +43,23 @@ static void 	apply_specifiers_to_arg(t_data_format *data, char *arg)
 		data->output = ft_strsub(data->argument, 0, ft_strlen(data->argument));
 }
 
-void 	generate_output(t_data_format *data, va_list ap)
+static int		print_output(t_data_format *data)
+{
+	if (data->output == NULL)
+	{
+		ft_putstr(data->argument);
+		return (ft_strlen(data->argument));
+	}
+	ft_putstr(data->output);
+	return (ft_strlen(data->output));
+}
+
+int 	generate_output(t_data_format *data, va_list ap)
 {
 	if (data->type != NULL)
 	{
 		data->argument = retrieve_according_type(data, data->type, ap); // argument is recorded
 		apply_specifiers_to_arg(data, data->argument);
 	}
+	return (print_percents(data->percentages / 2) + print_output(data));
 }
