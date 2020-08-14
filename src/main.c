@@ -5,26 +5,29 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
+static void 	define_char(int a)
+{
+	char letter = 'A';
+	if (a == 0)
+	{
+		while (letter <= 'Z')
+			ft_printf("# %c !", letter++);
+	}
+	else
+	{
+		while (letter <= 'Z')
+			printf("# %c !", letter++);
+	}
+}
+
 int 	main(void){
+	char *s0 = "hello World!";
+	char s[] = "hello C language!";
 	printf("---My function---\n");
-	ft_printf("%-d\n", -0);
-	ft_printf("%-d\n", -10);
-	ft_printf("%-d\n", -100);
-	ft_printf("%-d\n", -1000);
-	ft_printf("%-d\n", -10000);
-	ft_printf("%-d\n", -100000);
-	ft_printf("%-d\n", -1000000);
-	ft_printf("%-d\n", -10000000);
+	ft_printf("%s\n", s0);
+	ft_printf("%s\n", s);
 	printf("\n---Std function---\n");
-	printf("%-d\n", -0);
-	printf("%-d\n", -10);
-	printf("%-d\n", -100);
-	printf("%-d\n", -1000);
-	printf("%-d\n", -10000);
-	printf("%-d\n", -100000);
-	printf("%-d\n", -1000000);
-	printf("%-d\n", -10000000);
-
-
+	printf("%s\n", s0);
+	printf("%s\n", s);
 	return 0;
 }
