@@ -72,9 +72,7 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 	data->percentages = get_nbr_of_percentages(format);
 	if (data->percentages % 2 != 0)
 	{
-		data->flag = search_match(format, " +-#0");
-		if (data->flag == NULL)
-			data->flag = char_to_string(' ');
+		data->flag = get_flags(format, is_matched_to_flag);
 		data->width = get_width(format);
 		data->numeric_value_of_width = ft_atoi(data->width);
 		data->type = search_match(format, "cspdiouxXf");

@@ -4,10 +4,9 @@
 
 #include "ft_printf.h"
 
-static int		is_matched_to_flag(char ch)
+char 	*paste_sign_at_start(char *str, int sign)
 {
-	return ((ch == SPACE || ch == PLUS || ch == MINUS || ch == ZERO ||
-			ch == HASH) ? 1 : 0);
+
 }
 
 char 	*retrieve_str_by_pattern(const char **format, int(*fun)(char), int symbol)
@@ -24,8 +23,48 @@ char 	*retrieve_str_by_pattern(const char **format, int(*fun)(char), int symbol)
 	}
 	return (len == 0 ? char_to_string(symbol) : ft_strsub(end, 0, len));
 }
-char 	*record_flags(char const **format, t_data_format *data)
+
+static int		record_flag(short *value)
 {
-	data->flag = retrieve_str_by_pattern(format, is_matched_to_flag);
-	if (ft_strlen(data->flag) > 1)
+	*value = TRUE;
+	return (TRUE);
+}
+
+int		is_matched_to_flag(char ch, t_flag *flag)
+{
+	if (ch == PLUS)
+		return (record_flag(&(flag->pos)));
+	else if (ch == MINUS)
+		return (record_flag(&(flag->neg)));
+	else if (ch == SPACE)
+		return (record_flag(&(flag->space)));
+	else if (ch == ZERO)
+		return (record_flag(&(flag->zero)));
+	else if (ch == HASH)
+		return (record_flag(&(flag->hash)));
+	else
+		return (FALSE);
+}
+
+static void 	init(t_flag *tmp)
+{
+	tmp->pos = FALSE;
+	tmp->neg = FALSE;
+	tmp->space = TRUE;
+	tmp->hash = FALSE;
+	tmp->zero = FALSE;
+
+}
+
+t_flag		*get_flags(char const **format, int(*fun)(char, t_flag*))
+{
+	t_flag	*tmp;
+
+	tmp = (t_flag*)malloc(sizeof(t_flag));
+	if (tmp == NULL)
+		exit(1);
+	init(tmp);
+	while (fun(**format, tmp))
+		(*format)++;
+	return (tmp);
 }
