@@ -37,7 +37,7 @@ static char 	*get_width(char const **format)
 		end++;
 	diff = end - *format;
 	if (diff == 0)
-		return (NULL);
+		return (char_to_string('0'));
 	else
 	{
 		width = ft_strsub(*format, 0, diff);
@@ -74,8 +74,10 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 	if (data->percentages % 2 != 0)
 	{
 		data->flag = search_match(format, " +-#0");
+		if (data->flag == NULL)
+			data->flag = char_to_string(' ');
 		data->width = get_width(format);
-		data->numeric_value_of_width = data->width == NULL ? 0 : ft_atoi(data->width);
+		data->numeric_value_of_width = ft_atoi(data->width);
 		data->type = search_match(format, "cspdiouxXf");
 		return (generate_output(data, ap));
 	}
