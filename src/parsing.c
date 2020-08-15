@@ -2,7 +2,6 @@
 // Created by alexey on 10.08.2020.
 //
 #include "ft_printf.h"
-#define PERCENT 37
 
 static int		get_nbr_of_percentages(char const **format)
 {

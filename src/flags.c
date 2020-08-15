@@ -5,8 +5,6 @@
 #include "ft_printf.h"
 #define LEFT 0
 #define RIGHT 1
-#define SPACE 32
-#define ZERO 48
 
 static void		alignment_by_zeros(t_data_format *data, char *arg, int arg_len, int diff)
 {
