@@ -49,9 +49,9 @@ void		process_flag(t_data_format *data, char *flag, char *arg)
 	else if (*flag == ' ')
 		align_output(data, arg, "right", SPACE);
 	else if (*flag == '0')
-		return align_output(data, arg, "right", ZERO);
+		align_output(data, arg, "right", ZERO);
 	else if (*flag == '+')
-		return;
+		align_output(data, arg, "right", SPACE);
 	else if (*flag == '#')
 		return;
 }
