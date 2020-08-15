@@ -22,8 +22,10 @@
 
 int 	main(void){
 	printf("---My function---\n");
-	printf("my = %d\n", ft_printf("%-20d\n", 10));
+	//printf("my = %d\n", ft_printf("hello %%%-20d %% %% %-4c\n", 10, 'A'));
+	printf("my = %d\n", ft_printf("% 3d", +10));
 	printf("\n---Std function---\n");
-	printf("std = %d\n", printf("%-20d\n", 10));
+	//printf("std = %d\n", printf("hello %%%-20d %% %% %-4c\n", 10, 'A'));
+	printf("sd = %d\n", printf("% 3d", +10));
 	return 0;
 }
