@@ -4,28 +4,30 @@
 
 #include "ft_printf.h"
 
-int 	free_struct(t_data_format *data)
+int 	free_fields(t_data_format *data, char *pattern)
 {
 	int	result;
 
-	result = ft_strlen(data->argument);
-	result = ft_strlen(data->output);
+	if (ft_strequ("arg", pattern))
+	{
+		ft_putstr(data->argument);
+		result = ft_strlen(data->argument);
+	}
+	else
+	{
+		ft_putstr(data->output);
+		result = ft_strlen(data->output);
+		free(data->output);
+		data->output = NULL;
+	}
 	free(data->flag);
 	free(data->width);
 	free(data->type);
-	free(data->output);
-	data->output = NULL;
 	free(data->argument);
-	data->argument = NULL;
+	return (result);
 }
 
 int		print_output(t_data_format *data)
 {
-	if (data->output == NULL)
-	{
-		ft_putstr(data->argument);
-		return (ft_strlen(data->argument));
-	}
-	ft_putstr(data->output);
-	return (ft_strlen(data->output));
+	return (data->output == NULL ? free_fields(data, "arg") : free_fields(data, "output"));
 }

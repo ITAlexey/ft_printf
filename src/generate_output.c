@@ -3,6 +3,12 @@
 //
 
 #include "ft_printf.h"
+#define NULLSTR "(null)"
+
+static char 	*get_arg(char *s)
+{
+	return (ft_strsub(s, 0, ft_strlen(s)));
+}
 
 static char 	*retrieve_according_type(t_data_format *data, char *type, va_list ap)
 {
@@ -15,7 +21,7 @@ static char 	*retrieve_according_type(t_data_format *data, char *type, va_list a
 	else if (ft_strequ(type, "s"))
 	{
 		string = va_arg(ap, char*);
-		return (ft_strsub(string, 0, ft_strlen(string)));
+		return (string == NULL ? get_arg(NULLSTR) : get_arg(string));
 	}
 	else
 		return (NULL);

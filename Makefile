@@ -4,6 +4,7 @@ SRC = ft_printf \
 		parsing \
 		flags \
 		generate_output \
+		print_output \
 		main
 
 VPATH = src

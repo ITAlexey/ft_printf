@@ -24,6 +24,6 @@ int					generate_output(t_data_format *data, va_list ap);
 void				process_flag(t_data_format *data, char *flag, char *arg);
 int					ft_printf(char const *format, ...);
 int 				print_percents(int times);
-int 				printf_output(t_data_format *data);
+int 				print_output(t_data_format *data);
 
 #endif
