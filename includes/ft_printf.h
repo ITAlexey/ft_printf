@@ -20,21 +20,18 @@ typedef struct		s_flag
 	short 			neg;
 	short 			pos;
 	short 			zero;
-	short 			space;
 	short 			hash;
-
+	short 			space
 }					t_flag;
 
 typedef struct		s_data_format
 {
 	int				percentages;
 	char			*width;
-	int				numeric_value_of_width;
-	char			*type;
+	short 			is_digit;
+	char			type;
 	char			*argument;
-	char			*output;
 	t_flag			*flag;
-
 }					t_data_format;
 
 int					parse_format(char const **format, t_data_format *data, va_list ap);
@@ -43,7 +40,8 @@ void				process_flag(t_data_format *data, char *flag, char *arg);
 int					ft_printf(char const *format, ...);
 int 				print_percents(int times);
 int 				print_output(t_data_format *data);
-t_flag 				*get_flags(char const **format, int(*fun)(char, t_fil*));
-char 				*retrieve_str_by_pattern(char const **format, int(*fun)(char), int symbol);
+t_flag 				*get_flags(char const **format, int(*fun)(char ch, t_fil* flag));
+int					is_matched_to_flag(char ch, t_flag *flag);
+char 				*retrieve_str_by_pattern(char const **format, int (*fun)(char ch), int symbol);
 
 #endif

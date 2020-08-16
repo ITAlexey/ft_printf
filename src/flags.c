@@ -40,16 +40,25 @@ static void 	align_output(t_data_format *data, char *arg, char *direction, char 
 	}
 }
 
-void		process_flag(t_data_format *data, char *flag, char *arg)
+void 		add_sign(t_data_format *data, char *sign)
 {
-	if (*flag == '-')
-		align_output(data, arg, "left", SPACE);
-	else if (*flag == ' ')
-		align_output(data, arg, "right", SPACE);
-	else if (*flag == '0')
-		align_output(data, arg, "right", ZERO);
-	else if (*flag == '+')
-		align_output(data, arg, "right", SPACE);
-	else if (*flag == '#')
-		return;
+	char 	*tmp;
+
+	tmp = data->argument;
+	data->argument = ft_strjoin(sign, tmp);
+	free(tmp);
+}
+
+void		process_flag(t_data_format *data, t_flag *flag, char *arg)
+{
+	int		width;
+	int 	len;
+
+	len = ft_strlen(data->argument)
+	width = ft_atoi(data->width);
+	if (len >= width)
+	{
+		if ((flag->pos + flag->space) != 0)
+			add_sign(data, flag->pos == TRUE ? "+" : " ");
+	}
 }
