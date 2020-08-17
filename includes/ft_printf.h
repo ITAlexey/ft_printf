@@ -38,7 +38,7 @@ int					ft_printf(char const *format, ...);
 int					parse_format(char const **format, t_data_format *data, va_list ap);
 t_flag 				*get_flags(char const **format, int(*fun)(char ch, t_flag* flag));
 int					is_matched_to_flag(char ch, t_flag *flag);
-char 				*retrieve_str_by_pattern(char const **format, int (*fun)(int ch), int symbol);
+int 				get_width(char const **format, int (*fun)(int ch), int symbol);
 int					generate_output(t_data_format *data, va_list ap);
 void				process_flag(t_data_format *data, t_flag *flag, short is_digit);
 int 				print_signs(int times, int sign);

@@ -29,7 +29,7 @@ int 			ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (*format != '\0')
 	{
-		if (*format == '%')
+		if (*format == PERCENT)
 			res += parse_format(&format, data, ap);
 		else
 		{

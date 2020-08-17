@@ -16,10 +16,11 @@ static int		get_nbr_of_percentages(char const **format)
 	return (percent_counter);
 }
 
-char 	*retrieve_str_by_pattern(const char **format, int(*fun)(int), int symbol)
+int 	get_width(const char **format, int(*fun)(int), int symbol)
 {
 	int 	len;
 	char 	*end;
+	char 	*res;
 
 	end = (char*)(*format);
 	len = 0;
@@ -28,7 +29,10 @@ char 	*retrieve_str_by_pattern(const char **format, int(*fun)(int), int symbol)
 		(*format)++;
 		len++;
 	}
-	return (len == 0 ? char_to_string(symbol) : ft_strsub(end, 0, len));
+	res = (len == 0 ? char_to_string(symbol) : ft_strsub(end, 0, len));
+	len = ft_atoi(res);
+	free(res);
+	return (len);
 }
 
 static char 	get_type(char const **format, char *pattern)
@@ -57,7 +61,7 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 	if (data->percentages % 2 != 0)
 	{
 		data->flag = get_flags(format, is_matched_to_flag);
-		data->width = ft_atoi(retrieve_str_by_pattern(format, ft_isdigit, ZERO));
+		data->width = get_width(format, ft_isdigit, ZERO);
 		data->type = get_type(format, "cspdiouxXf");
 		data->is_digit = is_digit_type(data->type);
 		return (generate_output(data, ap));

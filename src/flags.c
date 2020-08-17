@@ -4,6 +4,53 @@
 
 #include "ft_printf.h"
 
+static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, short is_digit)
+{
+	int		diff;
+	short 	offset;
+
+	diff = width - arg_len;
+	offset = 0;
+	if (flag->neg == TRUE)
+	{
+		if (is_digit == TRUE && *(arg) != '-' && (flag->pos + flag->space) != 0)
+			ft_putchar(flag->pos == TRUE ? PLUS : SPACE);
+		ft_putstr(arg);
+		print_signs(diff, SPACE);
+	}
+	else if (is_digit == TRUE)
+	{
+		if (*arg == '-')
+		{
+			offset = flag->zero == TRUE ? 1 : 0;
+			ft_putchar(offset != 0 ? MINUS : 0);
+			print_signs(diff, offset != 0 ? ZERO : SPACE);
+			ft_putstr(arg + offset);
+		}
+		else
+		{
+			if (flag->pos + flag->space + flag->zero != 0)
+			{
+				ft_putchar(flag->pos == TRUE ? PLUS : 0);
+				ft_putchar(flag->space == TRUE ? SPACE : 0);
+				print_signs(--diff, flag->zero == TRUE ? ZERO : SPACE);
+				ft_putstr(arg);
+			}
+			else
+			{
+				print_signs(diff, SPACE);
+				ft_putstr(arg);
+			}
+		}
+
+	}
+	else
+	{
+		print_signs(diff, SPACE);
+		ft_putstr(arg);
+	}
+}
+
 void		process_flag(t_data_format *data, t_flag *flag, short is_digit)
 {
 	int 	len;
@@ -21,38 +68,5 @@ void		process_flag(t_data_format *data, t_flag *flag, short is_digit)
 		ft_putstr(data->argument);
 	}
 	else
-	{
-		int diff = data->width - len;
-		if (flag->neg == TRUE)
-		{
-			if (data->is_digit == TRUE && *(data->argument) != '-' && (flag->pos + flag->space) != 0)
-				ft_putchar(flag->pos == TRUE ? PLUS : SPACE);
-			ft_putstr(data->argument);
-			print_signs(diff, SPACE);
-		}
-		if (data->is_digit == TRUE)
-		{
-			if (*(data->argument) != '-' && (flag->pos + flag->space + flag->zero) != 0)
-			{
-				if (flag->pos + flag->space != 0)
-				{
-					ft_putchar(flag->pos == TRUE ? PLUS : SPACE);
-					diff--;
-				}
-				print_signs(diff, flag->zero == TRUE ? ZERO : SPACE);
-				ft_putstr(data->argument);
-			}
-			if (flag->zero == FALSE)
-			{
-				ft_putchar(MINUS);
-				print_signs(diff, ZERO);
-				ft_putstr(data->argument + 1);
-			}
-		}
-		else
-		{
-			print_signs(diff, SPACE);
-			ft_putstr(data->argument);
-		}
-	}
+		align_by_width(data->argument, len, flag, data->width, is_digit);
 }
