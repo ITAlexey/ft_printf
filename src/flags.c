@@ -4,57 +4,55 @@
 
 #include "ft_printf.h"
 
-void 		add_sign(t_data_format *data, char *sign)
+void		process_flag(t_data_format *data, t_flag *flag, short is_digit)
 {
+	int 	len;
 	char 	*tmp;
 
-	tmp = data->argument;
-	data->argument = ft_strjoin(sign, tmp);
-	free(tmp);
-}
-
-void		process_flag(t_data_format *data, t_flag *flag, char *arg)
-{
-	int		width;
-	int 	len;
-
-	len = ft_strlen(data->argument)
-	width = ft_atoi(data->width);
-	if (len >= width)
+	len = ft_strlen(data->argument);
+	if (len >= data->width)
 	{
-		if ((flag->pos + flag->space) != 0 && *(data->argument) != '-')
-			add_sign(data, flag->pos == TRUE ? "+" : " ");
+		if (is_digit == TRUE && (flag->pos + flag->space) != 0 && *(data->argument) != '-')
+		{
+			tmp = data->argument;
+			data->argument = ft_strjoin(flag->pos == TRUE ? "+" : " ", tmp);
+			free(tmp);
+		}
+		ft_putstr(data->argument);
 	}
 	else
 	{
-		char *tmp;
-
-		tmp = data->argument;
-		data->argument = ft_strnew(width);
+		int diff = data->width - len;
 		if (flag->neg == TRUE)
 		{
-			if (*(data->argument) != '-' && (flag->pos  + flag->space) != 0)
-			{
-				*(data->argument) = flag->pos == TRUE ? '+' : " ";
-				ft_memset((char*)(ft_strcpy(data->argument + 1, tmp) + len), SPACE, width - len);
-			}
-			else
-				ft_memset((char*)(ft_strcpy(data->argument, tmp) + len), SPACE, width - len);
+			if (data->is_digit == TRUE && *(data->argument) != '-' && (flag->pos + flag->space) != 0)
+				ft_putchar(flag->pos == TRUE ? PLUS : SPACE);
+			ft_putstr(data->argument);
+			print_signs(diff, SPACE);
 		}
-		else
+		if (data->is_digit == TRUE)
 		{
 			if (*(data->argument) != '-' && (flag->pos + flag->space + flag->zero) != 0)
 			{
-				
+				if (flag->pos + flag->space != 0)
+				{
+					ft_putchar(flag->pos == TRUE ? PLUS : SPACE);
+					diff--;
+				}
+				print_signs(diff, flag->zero == TRUE ? ZERO : SPACE);
+				ft_putstr(data->argument);
 			}
-			else if (flag->zero == FALSE)
-				ft_memset((char*)(ft_strcpy(data->argument + (width - len), tmp), SPACE, (width - len)));
-			else
+			if (flag->zero == FALSE)
 			{
-				*(data->argument) = '-';
-				ft_memset((char*)(ft_strcpy(data->argument + (width - len) + 1, tmp + 1) + 1, ZERO, (width - len - 1)));
+				ft_putchar(MINUS);
+				print_signs(diff, ZERO);
+				ft_putstr(data->argument + 1);
 			}
 		}
-		free(tmp);
+		else
+		{
+			print_signs(diff, SPACE);
+			ft_putstr(data->argument);
+		}
 	}
 }

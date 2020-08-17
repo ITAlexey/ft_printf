@@ -4,6 +4,19 @@
 
 #include "ft_printf.h"
 
+int 		print_signs(int times, int sign)
+{
+	int	tmp;
+
+	tmp = times;
+	while (tmp)
+	{
+		ft_putchar(sign);
+		tmp--;
+	}
+	return (times);
+}
+
 int 			ft_printf(const char *format, ...)
 {
 	va_list			ap;
@@ -13,7 +26,6 @@ int 			ft_printf(const char *format, ...)
 	res = 0;
 	if (!(data = (t_data_format*)malloc(sizeof(t_data_format))))
 		exit(0);
-	data->output = NULL;
 	va_start(ap, format);
 	while (*format != '\0')
 	{

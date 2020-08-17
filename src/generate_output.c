@@ -23,7 +23,7 @@ static char 	*retrieve_according_type(t_data_format *data, va_list ap)
 		string = va_arg(ap, char*);
 		return (string == NULL ? get_arg(NULLSTR) : get_arg(string));
 	}
-	else if (data->type == 'p')
+	/*else if (data->type == 'p')
 		return;
 	else if (data->type == 'f')
 		return;
@@ -36,22 +36,28 @@ static char 	*retrieve_according_type(t_data_format *data, va_list ap)
 	else if (data->type == 'x')
 		return;
 	else if (data->type == 'X')
-		return;
+		return;*/
 	else
 		return (NULL);
 }
 
-static void 	apply_specifiers_to_arg(t_data_format *data, char *arg)
+static void 	apply_specifiers_to_arg(t_data_format *data)
 {
-	process_flag(data, data->flag, arg);
+	process_flag(data, data->flag, data->is_digit);
 }
 
 int 	generate_output(t_data_format *data, va_list ap)
 {
+	int	result;
+
+	result = 0;
 	if (data->type != '\0')
 	{
 		data->argument = retrieve_according_type(data, ap);
-		apply_specifiers_to_arg(data, data->argument);
+		apply_specifiers_to_arg(data);
+		result = MAX(data->width, (int) ft_strlen(data->argument));
+		free(data->flag);
+		free(data->argument);
 	}
-	return (print_percents(data->percentages / 2) + print_output(data));
+	return (print_signs(data->percentages / 2, PERCENT) + result);
 }
