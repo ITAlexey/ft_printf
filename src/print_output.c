@@ -8,10 +8,9 @@ int		print_output(t_data_format *data)
 {
 	int 	result;
 
-	result = ft_strlen(data->argument);
+	result = MAX(data->width, ft_strlen(data->argument));
 	ft_putstr(data->argument);
 	free(data->flag);
-	free(data->width);
 	free(data->argument);
 	return (result);
 }

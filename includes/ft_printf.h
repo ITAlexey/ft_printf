@@ -14,6 +14,7 @@
 # define ZERO 48
 # define TRUE 1
 # define FALSE 0
+# define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 typedef struct		s_flag
 {
@@ -27,7 +28,7 @@ typedef struct		s_flag
 typedef struct		s_data_format
 {
 	int				percentages;
-	char			*width;
+	int 			width;
 	short 			is_digit;
 	char			type;
 	char			*argument;

@@ -70,7 +70,7 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 	if (data->percentages % 2 != 0)
 	{
 		data->flag = get_flags(format, is_matched_to_flag);
-		data->width = retrieve_str_by_pattern(format, ft_isdigit, ZERO);
+		data->width = ft_atoi(retrieve_str_by_pattern(format, ft_isdigit, ZERO));
 		data->type = get_type(format, "cspdiouxXf");
 		data->is_digit = is_digit_type(data->type);
 		return (generate_output(data, ap));
