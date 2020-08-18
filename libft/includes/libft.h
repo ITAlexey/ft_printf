@@ -20,6 +20,8 @@
 # define ABC(c) ((c) < 0 ? -(c) : (c))
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define ISNULL(pointer) if ((pointer) == NULL) return (pointer)
+# define TRUE 1
+# define FALSE 0
 # define BUFF_SIZE 17
 
 typedef struct		s_list
@@ -38,6 +40,7 @@ int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
+char				*ft_itoa_base(long long nbr, unsigned int base);
 void				ft_free2darray(void **array);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -98,5 +101,6 @@ int					ft_is_prime(size_t nb);
 size_t				ft_count_words(const char *str, int c);
 int					get_next_line(int const fd, char **line);
 char				*nbr_to_string(long long nbr);
+char				*reverse_string(char *str);
 
 #endif

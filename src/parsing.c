@@ -16,7 +16,7 @@ static int		get_nbr_of_percentages(char const **format)
 	return (percent_counter);
 }
 
-int 	get_width(const char **format, int(*fun)(int), int symbol)
+int 	get_numeric_value(const char **format, int(*fun)(int), int symbol)
 {
 	int 	len;
 	char 	*end;
@@ -61,7 +61,9 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 	if (data->percentages % 2 != 0)
 	{
 		data->flag = get_flags(format, is_matched_to_flag);
-		data->width = get_width(format, ft_isdigit, ZERO);
+		data->width = get_numeric_value(format, ft_isdigit, ZERO);
+		*format += **format == DOT ? 1 : 0;
+		data->precision = get_numeric_value(format, ft_isdigit, ZERO);
 		data->type = get_type(format, "cspdiouxXf");
 		data->is_digit = is_digit_type(data->type);
 		return (generate_output(data, ap));
