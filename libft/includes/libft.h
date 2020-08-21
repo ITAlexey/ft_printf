@@ -102,5 +102,5 @@ size_t				ft_count_words(const char *str, int c);
 int					get_next_line(int const fd, char **line);
 char				*nbr_to_string(long long nbr);
 char				*reverse_string(char *str);
-
+char 				*ft_uitoa_base(unsigned long long n, unsigned base);
 #endif

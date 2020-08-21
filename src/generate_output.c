@@ -17,13 +17,13 @@ static char 	*retrieve_according_type(t_data_format *data, va_list ap)
 	if (data->type == 'd' || data->type == 'i')
 		return (parse_type_d(data->specifier, ap));
 	else if (data->type == 'p')
-		return (ft_itoa_base((long long)va_arg(ap, void *), 16);
+		return (ft_itoa_base((long long)va_arg(ap, void *), 16));
 	else if (data->type == 'o')
 		return (parse_type_o(data->specifier, ap));
 	else if (data->type == 'u')
 		return (parse_type_u(data->specifier, ap));
 	else if (data->type == 'x')
-		return (ft_tolower(ft_itoa_base(va_arg(ap, long long), 16)));
+		return (ft_strlowcase(ft_itoa_base(va_arg(ap, long long), 16)));
 	else if (data->type == 'X')
 		return (ft_itoa_base(va_arg(ap, long long), 16));
 	else if (data->type == 'c')

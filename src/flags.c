@@ -22,7 +22,7 @@ static char 	*add_prefix(char *arg, char type)
 	return (arg);
 }
 
-static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, short is_digit)
+static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, t_data_format *data)
 {
 	int		diff;
 	short 	offset;
@@ -31,12 +31,12 @@ static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, sho
 	offset = 0;
 	if (flag->neg == TRUE)
 	{
-		if (is_digit == TRUE && *(arg) != '-' && (flag->pos + flag->space) != 0)
+		if (data->is_digit == TRUE && *(arg) != '-' && (flag->pos + flag->space) != 0)
 			ft_putchar(flag->pos == TRUE ? PLUS : SPACE);
 		ft_putstr(arg);
 		print_signs(diff, SPACE);
 	}
-	else if (is_digit == TRUE)
+	else if (data->is_digit == TRUE)
 	{
 		if (*arg == '-')
 		{
@@ -63,7 +63,7 @@ static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, sho
 	}
 	else
 	{
-		if (flag->hash == TRUE && data->type == 'x' || data->type == 'X' || data->type == 'o')
+		if (flag->hash == TRUE && (data->type == 'x' || data->type == 'X' || data->type == 'o'))
 			arg = add_prefix(arg, data->type);
 		print_signs(diff, SPACE);
 		ft_putstr(arg);
@@ -87,5 +87,5 @@ void		process_flag(t_data_format *data, t_flag *flag, short is_digit)
 		ft_putstr(data->argument);
 	}
 	else
-		align_by_width(data->argument, len, flag, data->width, is_digit);
+		align_by_width(data->argument, len, flag, data->width, data);
 }

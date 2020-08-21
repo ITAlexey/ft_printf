@@ -73,7 +73,7 @@ static char 	get_type(char const **format, char *pattern)
 
 static short	is_digit_type(char ch)
 {
-	return ((ch == 'd' || ch == 'i' || ch == 'f')) ? TRUE : FALSE);
+	return ((ch == 'd' || ch == 'i' || ch == 'f') ? TRUE : FALSE);
 }
 
 int			parse_format(char const **format, t_data_format *data, va_list ap)

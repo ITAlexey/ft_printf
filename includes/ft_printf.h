@@ -49,7 +49,7 @@ typedef struct		s_data_format
 	char			type;
 	char			*argument;
 	t_flag			*flag;
-	u_fpoint		*float_type;
+	t_fpoint		*float_type;
 	short 			specifier;
 }					t_data_format;
 

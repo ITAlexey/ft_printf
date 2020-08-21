@@ -27,7 +27,7 @@ char		*ft_uitoa_base(unsigned long long nbr, unsigned int base)
 	char	*str_base;
 	int		len;
 
-	len = get_itoa_len(nbr, base);
+	len = get_uitoa_len(nbr, base);
 	str_base = "0123456789ABCDEF";
 	if (nbr == 0)
 		return (char_to_string('0'));
