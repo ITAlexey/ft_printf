@@ -4,6 +4,24 @@
 
 #include "ft_printf.h"
 
+static char 	*add_prefix(char *arg, char type)
+{
+	char	*tmp;
+
+	tmp = arg;
+	if (ft_strequ(arg, "0") != 0)
+	{
+		if (type == 'x')
+			arg = ft_strjoin("0x", arg);
+		else if (type == 'X')
+			arg = ft_strjoin("0X", arg);
+		else
+			arg = ft_strjoin("0", arg);
+		free(tmp);
+	}
+	return (arg);
+}
+
 static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, short is_digit)
 {
 	int		diff;
@@ -42,10 +60,11 @@ static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, sho
 				ft_putstr(arg);
 			}
 		}
-
 	}
 	else
 	{
+		if (flag->hash == TRUE && data->type == 'x' || data->type == 'X' || data->type == 'o')
+			arg = add_prefix(arg, data->type);
 		print_signs(diff, SPACE);
 		ft_putstr(arg);
 	}

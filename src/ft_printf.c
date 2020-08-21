@@ -25,7 +25,7 @@ int 			ft_printf(const char *format, ...)
 
 	res = 0;
 	if (!(data = (t_data_format*)malloc(sizeof(t_data_format))))
-		exit(0);
+		exit(12);
 	va_start(ap, format);
 	while (*format != '\0')
 	{

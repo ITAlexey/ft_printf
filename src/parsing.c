@@ -43,16 +43,16 @@ static short 	get_specifier(char const **format)
 	if (**format == 'l' || **format == 'h' || **format == 'L')
 	{
 		if (**format == 'l' && *((*format) + 1) == 'l')
-			specifier = DBLL;
+			specifier = LL;
 		else if (**format == 'h' && (*(*format) + 1) == 'h')
-			specifier = DBLH;
+			specifier = HH;
 		else if (**format == 'l')
 			specifier = L;
 		else if (**format == 'h')
 			specifier = H;
 		else
 			specifier = BIGL;
-		*format += specifier == DBLH || specifier == DBLL ? 2 : 1;
+		*format += specifier == HH || specifier == LL ? 2 : 1;
 	}
 	return (specifier);
 }
@@ -73,8 +73,7 @@ static char 	get_type(char const **format, char *pattern)
 
 static short	is_digit_type(char ch)
 {
-	return ((ch == 'd' || ch == 'l' || ch == 'h' || ch == 'i' || ch == 'f'
-			|| ch == 'o' || ch == 'u' || ch == 'x' || ch == 'X') ? TRUE : FALSE);
+	return ((ch == 'd' || ch == 'i' || ch == 'f')) ? TRUE : FALSE);
 }
 
 int			parse_format(char const **format, t_data_format *data, va_list ap)

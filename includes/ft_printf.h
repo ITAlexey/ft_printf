@@ -15,8 +15,8 @@
 # define DOT 46
 # define L 1
 # define H 2
-# define DBLL 3
-# define DBLH 4
+# define LL 3
+# define HH 4
 # define BIGL 5
 
 typedef union	 		u_fpoint
@@ -61,5 +61,8 @@ int 				get_numeric_value(char const **format, int (*fun)(int ch), int symbol);
 int					generate_output(t_data_format *data, va_list ap);
 void				process_flag(t_data_format *data, t_flag *flag, short is_digit);
 int 				print_signs(int times, int sign);
+char 				*parse_type_d(short specifier, va_list ap);
+char 				*parse_type_u(short specifier, va_list ap);
+char 				*parse_type_o(short specifier, va_list ap);
 
 #endif

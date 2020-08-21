@@ -15,7 +15,17 @@ static char 	*retrieve_according_type(t_data_format *data, va_list ap)
 	char	*string;
 
 	if (data->type == 'd' || data->type == 'i')
-		return (nbr_to_string(va_arg(ap, long long)));
+		return (parse_type_d(data->specifier, ap));
+	else if (data->type == 'p')
+		return (ft_itoa_base((long long)va_arg(ap, void *), 16);
+	else if (data->type == 'o')
+		return (parse_type_o(data->specifier, ap));
+	else if (data->type == 'u')
+		return (parse_type_u(data->specifier, ap));
+	else if (data->type == 'x')
+		return (ft_tolower(ft_itoa_base(va_arg(ap, long long), 16)));
+	else if (data->type == 'X')
+		return (ft_itoa_base(va_arg(ap, long long), 16));
 	else if (data->type == 'c')
 		return (char_to_string(va_arg(ap, int)));
 	else if (data->type == 's')
@@ -23,18 +33,8 @@ static char 	*retrieve_according_type(t_data_format *data, va_list ap)
 		string = va_arg(ap, char*);
 		return (string == NULL ? get_arg(NULLSTR) : get_arg(string));
 	}
-	else if (data->type == 'p')
-		return (nbr_to_string(va_arg(ap, unsigned long long)));
 	else if (data->type == 'f')
-		return;
-	else if (data->type == 'o')
-		return (ft_itoa(va_arg(ap, long long), 8));
-	else if (data->type == 'u')
-		return (nbr_to_string(va_arg(ap, unsigned long long));
-	else if (data->type == 'x')
-		return (ft_itoa(va_arg(ap, long long), 16));
-	else if (data->type == 'X')
-		return (ft_strupcase(ft_itoa(va_arg(ap, long long), 16)));
+		return (NULL);
 	else
 		return (NULL);
 }

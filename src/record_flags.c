@@ -41,7 +41,7 @@ t_flag		*get_flags(char const **format, int(*fun)(char, t_flag*))
 
 	tmp = (t_flag*)malloc(sizeof(t_flag));
 	if (tmp == NULL)
-		exit(1);
+		exit(12);
 	init(tmp);
 	while (fun(**format, tmp))
 		(*format)++;
