@@ -24,7 +24,7 @@ int 	get_numeric_value(const char **format, int(*fun)(int), int symbol)
 
 	end = (char*)(*format);
 	len = 0;
-	while (fun(**format) == 1)
+	while (fun(**format))
 	{
 		(*format)++;
 		len++;
@@ -33,6 +33,28 @@ int 	get_numeric_value(const char **format, int(*fun)(int), int symbol)
 	len = ft_atoi(res);
 	free(res);
 	return (len);
+}
+
+static short 	get_specifier(char const **format)
+{
+	short	specifier;
+
+	specifier = FALSE;
+	if (**format == 'l' || **format == 'h' || **format == 'L')
+	{
+		if (**format == 'l' && *((*format) + 1) == 'l')
+			specifier = DBLL;
+		else if (**format == 'h' && (*(*format) + 1) == 'h')
+			specifier = DBLH;
+		else if (**format == 'l')
+			specifier = L;
+		else if (**format == 'h')
+			specifier = H;
+		else
+			specifier = BIGL;
+		*format += specifier == DBLH || specifier == DBLL ? 2 : 1;
+	}
+	return (specifier);
 }
 
 static char 	get_type(char const **format, char *pattern)
@@ -64,6 +86,7 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 		data->width = get_numeric_value(format, ft_isdigit, ZERO);
 		*format += **format == DOT ? 1 : 0;
 		data->precision = get_numeric_value(format, ft_isdigit, ZERO);
+		data->specifier = get_specifier(format);
 		data->type = get_type(format, "cspdiouxXf");
 		data->is_digit = is_digit_type(data->type);
 		return (generate_output(data, ap));

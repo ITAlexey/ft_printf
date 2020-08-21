@@ -13,6 +13,23 @@
 # define SPACE 32
 # define ZERO 48
 # define DOT 46
+# define L 1
+# define H 2
+# define DBLL 3
+# define DBLH 4
+# define BIGL 5
+
+typedef union	 		u_fpoint
+{
+	long double			nb;
+	struct
+	{
+		unsigned long	mantissa : 64;
+		unsigned		exp : 15;
+		unsigned short	sign : 1;
+	}					nb_bits;
+
+}						t_fpoint;
 
 typedef struct		s_flag
 {
@@ -32,6 +49,8 @@ typedef struct		s_data_format
 	char			type;
 	char			*argument;
 	t_flag			*flag;
+	u_fpoint		*float_type;
+	short 			specifier;
 }					t_data_format;
 
 int					ft_printf(char const *format, ...);
