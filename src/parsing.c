@@ -71,9 +71,9 @@ static char 	get_type(char const **format, char *pattern)
 	return (*pattern);
 }
 
-static short	is_digit_type(char ch)
+short	is_digit_type(char ch)
 {
-	return ((ch == 'd' || ch == 'i' || ch == 'f') ? TRUE : FALSE);
+	return ((ch == 'd' || ch == 'i' || ch == 'f' || ch == 'p') ? TRUE : FALSE);
 }
 
 int			parse_format(char const **format, t_data_format *data, va_list ap)
@@ -87,7 +87,6 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 		data->precision = get_numeric_value(format, ft_isdigit, ZERO);
 		data->specifier = get_specifier(format);
 		data->type = get_type(format, "cspdiouxXf");
-		data->is_digit = is_digit_type(data->type);
 		return (generate_output(data, ap));
 	}
 	return (print_signs(data->percentages / 2, PERCENT));
