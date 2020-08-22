@@ -14,6 +14,12 @@ char 	*add_prefix(char *arg, char *pattern)
 	return (arg);
 }
 
+short		is_hex_or_octal(char ch)
+{
+	return ((ch == 'x' || ch == 'X' || ch == 'o') ? 1 : 0);
+}
+
+/*
 static void 	put_zeros(t_flag *flag, int diff)
 {
 	if (flag->pos + flag->space)
@@ -74,18 +80,13 @@ static void 	align_by_width(char *arg, int arg_len, t_flag *flag, int width, cha
 	}
 }
 
-static short		is_not_decimal_type(char ch)
-{
-	return ((ch == 'x' || ch == 'X' || ch == 'o') ? 1 : 0);
-}
-
 void		process_flag(t_data_format *data, t_flag *flag, char type, int width)
 {
 	int 	len;
 
+	len = ft_strlen(data->argument);
 	if (flag->hash == TRUE && is_not_decimal_type(type) && ft_strcmp(data->argument, "0"))
 		data->argument = add_prefix(data->argument, type == 'x' || type == 'X' ? "0X" : "0");
-	len = ft_strlen(data->argument);
 	if (len >= width)
 	{
 		if (is_digit_type(type) && (flag->pos + flag->space) != 0 && *(data->argument) != '-')
@@ -94,4 +95,4 @@ void		process_flag(t_data_format *data, t_flag *flag, char type, int width)
 	}
 	else
 		align_by_width(data->argument, len, flag, width, type);
-}
+}*/

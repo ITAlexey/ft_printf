@@ -24,9 +24,9 @@ int 	main(void){
 	//char *p = "hello programmers!";
 	printf("---My function---\n");
 	//printf("my = %d\n", ft_printf("hello %%%-20d %% %% %-4c\n", 10, 'A'));
-	printf("\nmy = %d\n", ft_printf("%#04X", 3));
+	printf("\nmy = %d\n", ft_printf("%#o", 11));
 	printf("\n---Std function---\n");
 	//printf("std = %d\n", printf("hello %%%-20d %% %% %-4c\n", 10, 'A'));
-	printf("\nsd = %d\n", printf("%#04X", 3));
+	printf("\nsd = %d\n", printf("%#o", 11));
 	return 0;
 }

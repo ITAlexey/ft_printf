@@ -48,6 +48,7 @@ typedef struct		s_data_format
 	short 			is_digit;
 	char			type;
 	char			*argument;
+	int				arg_len;
 	t_flag			*flag;
 	t_fpoint		float_type;
 	short 			specifier;
@@ -61,7 +62,8 @@ int 				get_numeric_value(char const **format, int (*fun)(int ch), int symbol);
 int					generate_output(t_data_format *data, va_list ap);
 void				process_flag(t_data_format *data, t_flag *flag, char type, int width);
 int 				print_signs(int times, int sign);
-short 				is_digit_type(char ch);
+short 				is_decimal_or_pointer(char ch);
+short 				is_hex_or_octal(char ch);
 char 				*add_prefix(char *str, char *pattern);
 char 				*parse_type_d(short specifier, va_list ap);
 char 				*parse_type_u(short specifier, va_list ap);

@@ -39,6 +39,6 @@ char 			*parse_type_o(short specifier, va_list ap)
 	else if (specifier == LL)
 		return (ft_uitoa_base((long long)va_arg(ap, long long), 8));
 	else if (specifier == HH)
-		return (ft_uitoa_base((unsigned char)va_arg(ap, int), 8));
-	return (ft_uitoa_base(va_arg(ap, unsigned), 8));
+		return (ft_uitoa_base(va_arg(ap, int), 8));
+	return (ft_uitoa_base((unsigned long long)va_arg(ap, unsigned), 8));
 }

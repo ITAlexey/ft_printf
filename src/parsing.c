@@ -42,9 +42,9 @@ static short 	get_specifier(char const **format)
 	specifier = FALSE;
 	if (**format == 'l' || **format == 'h' || **format == 'L')
 	{
-		if (**format == 'l' && *((*format) + 1) == 'l')
+		if (**format == 'l' && *(*format + 1) == 'l')
 			specifier = LL;
-		else if (**format == 'h' && (*(*format) + 1) == 'h')
+		else if (**format == 'h' && *(*format + 1) == 'h')
 			specifier = HH;
 		else if (**format == 'l')
 			specifier = L;
@@ -71,7 +71,7 @@ static char 	get_type(char const **format, char *pattern)
 	return (*pattern);
 }
 
-short	is_digit_type(char ch)
+short	is_decimal_or_pointer(char ch)
 {
 	return ((ch == 'd' || ch == 'i' || ch == 'f' || ch == 'p') ? TRUE : FALSE);
 }
