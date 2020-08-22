@@ -12,7 +12,7 @@ static char 	*retrieve_according_type(t_data_format *data, va_list ap)
 	if (data->type == 'd' || data->type == 'i')
 		return (parse_type_d(data->specifier, ap));
 	else if (data->type == 'p')
-		return (ft_itoa_base((long long)va_arg(ap, void *), 16));
+		return (ft_strlowcase(add_prefix(ft_itoa_base((long long)va_arg(ap, void *), 16), "0x")));
 	else if (data->type == 'o')
 		return (parse_type_o(data->specifier, ap));
 	else if (data->type == 'u')
@@ -44,11 +44,46 @@ void 	apply_modifiers(t_data_format *data, t_flag *flag, char type, int width, i
 		if (diff < 0)
 		{
 			diff = ABC(diff);
-
+			if (!flag->zero)
+			{
+				if (*(data->argument) != '-' && (flag->space + flag->pos))
+				{
+					ft_putchar(flag->pos ? PLUS : SPACE);
+					diff--;
+				}
+				flag->neg ? ft_putstr(data->argument) : print_signs(diff, SPACE);
+				flag->neg ? print_signs(diff, SPACE) : ft_putstr(data->argument);
+			}
+			else
+			{
+				int offset = 0;
+				if (*(data->argument) != '-' && (flag->space + flag->pos))
+				{
+					ft_putchar(flag->pos ? PLUS : SPACE);
+					diff--;
+				}
+				if (*(data->argument) == '-')
+				{
+					ft_putchar(MINUS);
+					offset = 1;
+				}
+				if (type == 'p')
+				{
+					ft_putstr("0x");
+					offset = 2;
+				}
+				flag->neg ? ft_putstr(data->argument + offset) : print_signs(diff, ZERO);
+				flag->neg ? print_signs(diff, SPACE) : ft_putstr(data->argument + offset);
+			}
 		}
 		else
 		{
-			
+			if (*(data->argument) != '-' && (flag->space + flag->pos))
+			{
+				ft_putchar(flag->pos ? PLUS : SPACE);
+				*len += 1;
+			}
+			ft_putstr(data->argument);
 		}
 	}
 	else if (is_hex_or_octal(type))
