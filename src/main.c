@@ -21,12 +21,10 @@
 }*/
 
 int 	main(void){
-	char *p = "hello programmers!";
+	//char *p = "hello programmers!";
 	printf("---My function---\n");
-	//printf("my = %d\n", ft_printf("hello %%%-20d %% %% %-4c\n", 10, 'A'));
-	printf("\nmy = %d\n", ft_printf("%p", p));
+	printf("\nmy = %d\n", ft_printf("%015d", -213));
 	printf("\n---Std function---\n");
-	//printf("std = %d\n", printf("hello %%%-20d %% %% %-4c\n", 10, 'A'));
-	printf("\nsd = %d\n", printf("%p", p));
+	printf("\nsd = %d\n", printf("%015d", -213));
 	return 0;
 }

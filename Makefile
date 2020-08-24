@@ -2,7 +2,6 @@ NAME = printf
 
 SRC = ft_printf \
 		parsing \
-		flags \
 		generate_output \
 		parsing_types \
 		record_flags \
