@@ -16,6 +16,7 @@ static int	get_uitoa_len(unsigned long long nbr, unsigned int base)
 {
 	int		len;
 
+	len = 0;
 	while (nbr /= base)
 		len++;
 	return (++len);

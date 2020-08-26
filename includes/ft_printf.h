@@ -5,6 +5,7 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include "libft.h"
+# include <limits.h>
 # include <stdarg.h>
 # define PERCENT 37
 # define PLUS 43
@@ -17,17 +18,18 @@
 # define H 2
 # define LL 3
 # define HH 4
+# define OFFSET 16383;
 # define BIGL 5
 
 typedef union	 		u_fpoint
 {
-	long double			nb;
+	long double			ld;
 	struct
 	{
 		unsigned long	mantissa : 64;
 		unsigned		exp : 15;
 		unsigned short	sign : 1;
-	}					nb_bits;
+	}					field;
 
 }						t_fpoint;
 
@@ -49,7 +51,7 @@ typedef struct		s_data_format
 	char			type;
 	char			*arg;
 	t_flag			*flag;
-	t_fpoint		float_type;
+	t_fpoint		decimal;
 	short 			specifier;
 }					t_data_format;
 
@@ -67,5 +69,6 @@ char 				*add_prefix(char *str, char *pattern);
 char 				*parse_type_d(short specifier, va_list ap);
 char 				*parse_type_u(short specifier, va_list ap);
 char 				*parse_type_o(short specifier, va_list ap);
+char 				*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_list ap);
 
 #endif

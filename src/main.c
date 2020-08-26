@@ -23,8 +23,8 @@
 int 	main(void){
 	//char *p = "hello programmers!";
 	printf("---My function---\n");
-	printf("\nmy = %d\n", ft_printf("%015d", -213));
+	printf("\nmy = %d\n", ft_printf("%+0#10ho", 15));
 	printf("\n---Std function---\n");
-	printf("\nsd = %d\n", printf("%015d", -213));
+	printf("\nsd = %d\n", printf("%+0#10ho", 15));
 	return 0;
 }
