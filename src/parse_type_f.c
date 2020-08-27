@@ -26,6 +26,6 @@ char 	*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_l
 	data->specifier = data->specifier < 0 ? 6 : data->specifier;
 	exp = decimal.field.exp - OFFSET;
 	binary_mantissa = ft_uitoa_base(decimal.field.mantissa, 2);
-	data->argument = nbr_to_string((long long)decimal.ld);
+	//data->argument = nbr_to_string((long long)decimal.ld);
 
 }

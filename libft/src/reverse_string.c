@@ -14,18 +14,23 @@
 
 char 		*reverse_string(char *str)
 {
-	int 	len;
-	char 	*tmp;
+	size_t 	len;
+	char 	tmp;
 	int 	i;
+	int 	j;
 
-	ISNULL(str);
-	len = ft_strlen(str);
-	i = 0;
-	tmp = (char*)malloc(len + 1);
-	ISNULL(tmp);
-	while (len)
-		tmp[i++] = str[--len];
-	tmp[i] = 0;
-	free(str);
-	return (tmp);
+	if (str != NULL && *str != '\0')
+	{
+		len = ft_strlen(str);
+		i = 0;
+		j = len - 1;
+		len >>= 1;
+		while (i < len)
+		{
+			tmp = str[i];
+			str[i++] = str[j];
+			str[j--] = tmp;
+		}
+	}
+	return (str);
 }

@@ -4,14 +4,6 @@
 
 #include "ft_printf.h"
 
-static void 	swap(char **a, char **b)
-{
-	char *tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
 
 static char 	*align_to_length(char **nbr, unsigned diff)
 {

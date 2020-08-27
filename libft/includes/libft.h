@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # define ABC(c) ((c) < 0 ? -(c) : (c))
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define MIN(a, b) ((a) <= (b) ? (a) : (b))
 # define ISNULL(pointer) if ((pointer) == NULL) return (pointer)
 # define TRUE 1
 # define FALSE 0
