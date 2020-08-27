@@ -63,8 +63,8 @@ static char 	*retrieve_according_type(t_data_format *data, va_list ap)
 		string = va_arg(ap, char*);
 		return (ft_strdup(string == NULL ? NULLSTR : string));
 	}
-	//else if (data->type == 'f')
-		//return (parse_type_f(data, data->decimal, data->specifier, ap));
+	else if (data->type == 'f')
+		return (parse_type_f(data, data->decimal, data->specifier, ap));
 	else
 		return (NULL);
 }

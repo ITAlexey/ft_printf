@@ -65,6 +65,7 @@ int 				print_signs(int times, int sign);
 void				put_space_or_zero(char *arg, t_flag *flag, int times);
 short 				is_difp(char ch);
 short 				is_oXx(char ch);
+char 				*sum(char *a, char *b, unsigned len_a, unsigned len_b);
 char 				*add_prefix(char *str, char *pattern);
 char 				*parse_type_d(short specifier, va_list ap);
 char 				*parse_type_u(short specifier, va_list ap);
