@@ -14,6 +14,16 @@ char 	*add_prefix(char *arg, char *pattern)
 	return (arg);
 }
 
+char 	*add_suffix(char *arg, char *pattern)
+{
+	char *tmp;
+
+	tmp = arg;
+	arg = ft_strjoin(arg, pattern);
+	free(tmp);
+	return (arg);
+}
+
 short		is_oXx(char ch)
 {
 	return ((ch == 'x' || ch == 'X' || ch == 'o') ? 1 : 0);

@@ -138,9 +138,72 @@ char 	*convert_fraction_to_decimal(char *b_fract)
 	return(decimal_form);
 }
 
+void	rounding(char **decimal, char **integer, int prec)
+{
+	int		i;
+	int		tmp;
+
+	if (prec == 0 && (*decimal)[prec] > '5')
+		longadd(*integer, "1", integer);
+	if (prec <= (int)ft_strlen(*decimal))
+	{
+		tmp = prec;
+		if ((*decimal)[prec] >= '5' && prec > 0)
+		{
+			if ((*decimal)[tmp] == '9')
+				tmp = ifnine(decimal, integer, tmp);
+			else if ((*decimal)[tmp - 1] == '9')
+				tmp = ifnine(decimal, integer, tmp - 1);
+			else if ((*decimal)[tmp] < '9' && prec > 0)
+			{
+				i = tmp == prec ? 1 : 0;
+				if (!(*decimal)[tmp + i])
+					(*decimal)[tmp - i]--;
+				else
+					(*decimal)[tmp - i]++;
+			}
+		}
+		(*decimal)[prec] = '\0';
+	}
+}
+
+int 	case_of_nine(char **int_part, char **fract_part, int prn)
+{
+	while ((*fract_part)[prn] == '9')
+		(*fract_part)[prn--] = '0';
+	if (prn >= 0)
+		(*fract_part)[prn]++;
+	else
+		*int_part = sum(*int_part, ft_strdup("1"), ft_strlen(int_part), 1);
+	return (prn);
+}
+
+void 	round_nbr(char **int_part, char **fract_part, int prn)
+{
+	int cpy;
+
+	if (prn == 0 && *fract_part[prn] > '5')
+		*int_part = sum(*int_part, ft_strdup("1"), ft_strlen(int_part), 1);
+	if (prn <= (int)ft_strlen(*fract_part))
+	{
+		cpy = case_of_nine(int_part, fract_part, prn);
+
+		*fract_part[prn] = 0;
+	}
+}
+
 char 	*combine_nbr(t_data_format *data, char *int_part, char *fract_part, unsigned sign)
 {
+	char	*result;
 
+	round_nbr(&int_part, &fract_part, data->precision);
+	int_part = sign ? add_prefix(int_part, "-") : int_part;
+	if (data->flag->hash || data->precision)
+		int_part = add_suffix(int_part, ".");
+	result = ft_strjoin(int_part, fract_part);
+	ft_strdel(&int_part);
+	ft_strdel(&fract_part);
+	return (result);
 }
 
 char 	*represent_in_decimal_form(t_data_format *data, t_fpoint decimal, int exp, char *b_mant)
