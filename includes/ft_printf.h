@@ -71,5 +71,6 @@ char 				*parse_type_d(short specifier, va_list ap);
 char 				*parse_type_u(short specifier, va_list ap);
 char 				*parse_type_o(short specifier, va_list ap);
 char 				*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_list ap);
+char 				*represent_in_decimal_form(t_data_format *data, t_fpoint decimal, int exp, char *b_mant);
 
 #endif

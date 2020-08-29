@@ -92,8 +92,24 @@ char 	*convert_int_to_decimal(char *b_int, int exp)
 		b_int++;
 		exp--;
 	}
-	ft_strdel(b_int);
+	ft_strdel(&b_int);
 	return (decimal_form);
+}
+
+char	*powered_by_ten(char *nbr, int exp)
+{
+	char 	*tmp;
+	char 	*zeros;
+
+	tmp = nbr;
+	zeros = ft_strnew(exp);
+	ISNULL(zeros);
+	ft_memset(zeros, exp);
+	nbr = ft_strjoin(nbr, zeros);
+	ISNULL(nbr);
+	ft_strdel(&tmp);
+	ft_strdel(&zeros);
+	return (nbr);
 }
 
 char 	*convert_fraction_to_decimal(char *b_fract)
@@ -118,19 +134,35 @@ char 	*convert_fraction_to_decimal(char *b_fract)
 		max_pow--;
 		b_fract++;
 	}
-	ft_strdel(b_fract);
+	ft_strdel(&b_fract);
 	return(decimal_form);
 }
 
-char 	*get_full_nbr(t_data_format *data, t_fpoint decimal, int exp, char *b_mant)
+char 	*combine_nbr(t_data_format *data, char *int_part, char *fract_part, unsigned sign)
+{
+
+}
+
+char 	*represent_in_decimal_form(t_data_format *data, t_fpoint decimal, int exp, char *b_mant)
 {
 	char 	*int_part;
+	char 	*tmp;
 	char 	*fraction_part;
 
-	if (exp <= 64)
+	if (exp < 0)
+	{
+		exp = ABC(exp);
+		tmp = ft_strnew(exp);
+		ft_memset(tmp, ZERO, exp);
+		b_mant = add_prefix(b_mant, tmp);
+		ft_strdel(&tmp);
+		int_part = char_to_string(ZERO);
+		decimal_part = convert_fraction_to_decimal(b_mant);
+	}
+	else
 	{
 		int_part = convert_int_to_decimal(ft_strncat(ft_strnew(exp + 1), b_mant, exp + 1), exp);
-		decimal_part = convert_fraction_to_decimal(ft_strdup(b_mant + exp + 1))
+		decimal_part = convert_fraction_to_decimal(ft_strdup(b_mant + exp + 1));
 	}
-
+	return (combine_nbr(data, int_part, fraction_part, decimal.fieds.sign));
 }

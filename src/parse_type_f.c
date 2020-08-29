@@ -23,9 +23,7 @@ char 	*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_l
 			(double)va_arg(ap, double);
 	if ((decimal.feilds.exp == SHRT_MAX && decimal.feilds.mantissa > LONG_MAX) || decimal.lb != decimal.lb)
 		return (is_inf_or_nan(data));
-	data->precision = data->precision < 0 ? 6 : data->precision;
 	exp = decimal.field.exp - OFFSET;
 	binary_mantissa = ft_uitoa_base(decimal.field.mantissa, 2);
-	data->output = exp < 0 ? only_decimal(data, decimal, exp, binary_mantissa) :
-			get_full_nbr(data, decimal, exp, binary_mantissa);
+	data->output = represent_in_decimal_form(data, decimal, exp, binary_mantissa);
 }

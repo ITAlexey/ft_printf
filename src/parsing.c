@@ -71,6 +71,16 @@ static char 	get_type(char const **format, char *pattern)
 	return (*pattern);
 }
 
+int 		get_precision(char const **format)
+{
+	short	is_dot;
+
+	is_dot = **format == DOT ? 1 : 0;
+	if (is_dot)
+		(*format)++;
+	return (is_dot ? get_numeric_value(format, ft_isdigit, ZERO) : 6);
+}
+
 int			parse_format(char const **format, t_data_format *data, va_list ap)
 {
 	data->percentages = get_nbr_of_percentages(format);
@@ -78,8 +88,7 @@ int			parse_format(char const **format, t_data_format *data, va_list ap)
 	{
 		data->flag = get_flags(format, is_matched_to_flag);
 		data->width = get_numeric_value(format, ft_isdigit, ZERO);
-		*format += **format == DOT ? 1 : 0;
-		data->precision = get_numeric_value(format, ft_isdigit, ZERO);
+		data->precision = get_precision(format);
 		data->specifier = get_specifier(format);
 		data->type = get_type(format, "cspdiouxXf");
 	}
