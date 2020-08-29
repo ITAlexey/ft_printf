@@ -57,7 +57,7 @@ typedef struct		s_data_format
 
 int					ft_printf(char const *format, ...);
 int					parse_format(char const **format, t_data_format *data, va_list ap);
-t_flag 				*get_flags(char const **format, int(*fun)(char ch, t_flag* flag));
+t_flag 				*get_flags(char const **format, int (*fun)(char ch, t_flag* flag));
 int					is_matched_to_flag(char ch, t_flag *flag);
 int 				get_numeric_value(char const **format, int (*fun)(int ch), int symbol);
 int					generate_output(t_data_format *data, va_list ap);

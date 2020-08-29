@@ -4,7 +4,7 @@
 
 #include "ft_printf.h"
 
-static void 	swap(char **a, char **b)
+static void		swap(char **a, char **b)
 {
 	char *tmp;
 
@@ -13,13 +13,13 @@ static void 	swap(char **a, char **b)
 	*b = tmp;
 }
 
-static char 	*do_mult(char *a, char *b, char *res, unsigned len_a, unsigned len_b)
+static char	*do_mult(char *a, char *b, char *res, unsigned len_a, unsigned len_b)
 {
-	char 		nbr;
+	char		nbr;
 	int			index;
-	int 		i;
-	int		 	j;
-	short 		flag;
+	int			i;
+	int			j;
+	short		flag;
 
 	i = len_b;
 	while (i >= 0)
@@ -40,11 +40,11 @@ static char 	*do_mult(char *a, char *b, char *res, unsigned len_a, unsigned len_
 	return (res);
 }
 
-char 	*multiplication(char *a, char *b, unsigned len_a, unsigned len_b)
+char	*multiplication(char *a, char *b, unsigned len_a, unsigned len_b)
 {
-	char 		*result;
-	char 		*tmp;
-	unsigned 	len;
+	char		*result;
+	char		*tmp;
+	unsigned	len;
 
 	if (*a == ZERO || *b == ZERO)
 		return (char_to_string(ZERO));
