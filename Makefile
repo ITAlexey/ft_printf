@@ -5,6 +5,12 @@ SRC = ft_printf \
 		generate_output \
 		parsing_types \
 		record_flags \
+		integer_fraction_parts_calculations \
+		round_nbr \
+		decimal_float_representation \
+		parse_type_f \
+		sum \
+		multiplication \
 		main
 
 VPATH = src

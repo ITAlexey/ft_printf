@@ -20,8 +20,8 @@ static char 	*align_to_length(char **nbr, unsigned diff)
 
 char 	*sum(char *a, char *b, unsigned len_a, unsigned len_b)
 {
-	unsigned	len;
-	unsigned 	index;
+	int			len;
+	int		 	index;
 	char 		*result;
 	short 		flag;
 	char 		nbr;

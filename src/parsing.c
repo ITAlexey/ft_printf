@@ -71,7 +71,7 @@ static char 	get_type(char const **format, char *pattern)
 	return (*pattern);
 }
 
-int 		get_precision(char const **format)
+static int 		get_precision(char const **format)
 {
 	short	is_dot;
 

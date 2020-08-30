@@ -66,11 +66,18 @@ void				put_space_or_zero(char *arg, t_flag *flag, int times);
 short 				is_difp(char ch);
 short 				is_oXx(char ch);
 char 				*sum(char *a, char *b, unsigned len_a, unsigned len_b);
+char 				*multiplication(char *a, char *b, unsigned len_a, unsigned len_b);
 char 				*add_prefix(char *str, char *pattern);
+char				*add_suffix(char *arg, char *pattern);
 char 				*parse_type_d(short specifier, va_list ap);
 char 				*parse_type_u(short specifier, va_list ap);
 char 				*parse_type_o(short specifier, va_list ap);
 char 				*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_list ap);
 char 				*represent_in_decimal_form(t_data_format *data, t_fpoint decimal, int exp, char *b_mant);
+void			 	round_nbr(char **int_part, char **fract_part, int prn);
+char			 	*do_power(int exp, int max_exp, char*(*pow_raise)(int));
+char			 	*powered_value_of_base_two(int exp);
+char 				*powered_value_of_base_five(int exp);
+char				*powered_by_ten(char *nbr, int exp);
 
 #endif

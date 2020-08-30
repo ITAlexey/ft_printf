@@ -4,14 +4,15 @@
 
 #include "ft_printf.h"
 
-static char		*is_inf_on_nan(t_data_format *data)
+static char		*is_inf_or_nan(t_data_format *data)
 {
-	if (data->decimal.lb != data->decimal.lb)
+	if (data->decimal.ld != data->decimal.ld)
 		return (ft_strdup("nan"));
-	else if (data->decimal.sign == 1)
+	else if (data->decimal.field.sign == 1)
 		return (ft_strdup("-inf"));
-	else if (data->decimal.sign == 0)
+	else if (data->decimal.field.sign == 0)
 		return (ft_strdup("inf"));
+	return (ft_strdup("(null)"));
 }
 
 char 	*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_list ap)
@@ -21,9 +22,9 @@ char 	*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_l
 
 	decimal.ld = specifier == BIGL ? va_arg(ap, long double) :
 			(double)va_arg(ap, double);
-	if ((decimal.feilds.exp == SHRT_MAX && decimal.feilds.mantissa > LONG_MAX) || decimal.lb != decimal.lb)
+	if ((decimal.field.exp == SHRT_MAX && decimal.field.mantissa > LONG_MAX) || decimal.ld != decimal.ld)
 		return (is_inf_or_nan(data));
 	exp = decimal.field.exp - OFFSET;
 	binary_mantissa = ft_uitoa_base(decimal.field.mantissa, 2);
-	data->output = represent_in_decimal_form(data, decimal, exp, binary_mantissa);
+	return (represent_in_decimal_form(data, decimal, exp, binary_mantissa));
 }
