@@ -6,11 +6,11 @@
 #include "ft_printf.h"
 
 int 	main(void){
-	double k = -3.3;
+	double k = 3.3;
 	//char *p = "hello programmers!";
 	printf("---My function---\n");
-	printf("\nmy = %d\n", ft_printf("%.0f", k));
+	printf("\nmy = %d\n", ft_printf("%f", k));
 	printf("\n---Std function---\n");
-	printf("\nsd = %d\n", printf("%.0f", k));
+	printf("\nsd = %d\n", printf("%.20f", k));
 	return 0;
 }

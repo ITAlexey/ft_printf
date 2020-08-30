@@ -52,7 +52,7 @@ static char 	*combine_nbr(t_data_format *data, char *int_part, char *fract_part,
 {
 	char	*result;
 
-	round_nbr(&int_part, &fract_part, data->precision);
+	//round_nbr(&int_part, &fract_part, data->precision);
 	int_part = sign ? add_prefix(int_part, "-") : int_part;
 	if (data->flag->hash || data->precision)
 		int_part = add_suffix(int_part, ".");
