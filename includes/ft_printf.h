@@ -78,6 +78,5 @@ void			 	round_nbr(char **int_part, char **fract_part, int prn);
 char			 	*do_power(int exp, int max_exp, char*(*pow_raise)(int));
 char			 	*powered_value_of_base_two(int exp);
 char 				*powered_value_of_base_five(int exp);
-char				*powered_by_ten(char *nbr, int exp);
 
 #endif

@@ -15,10 +15,12 @@ static char		*is_inf_or_nan(t_data_format *data)
 	return (ft_strdup("(null)"));
 }
 
+
 char 	*parse_type_f(t_data_format *data, t_fpoint decimal, short specifier, va_list ap)
 {
 	char	*binary_mantissa;
 	int 	exp;
+	char 	*tmp;
 
 	decimal.ld = specifier == BIGL ? va_arg(ap, long double) :
 			(double)va_arg(ap, double);

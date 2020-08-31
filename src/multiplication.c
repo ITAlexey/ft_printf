@@ -13,7 +13,7 @@ static void		swap(char **a, char **b)
 	*b = tmp;
 }
 
-static char	*do_mult(char *a, char *b, char *res, unsigned len_a, unsigned len_b)
+static void		do_mult(char *a, char *b, char **res, unsigned len_a, unsigned len_b)
 {
 	char		nbr;
 	int			index;
@@ -29,15 +29,16 @@ static char	*do_mult(char *a, char *b, char *res, unsigned len_a, unsigned len_b
 		flag = 0;
 		while (j >= 0)
 		{
-			nbr = (a[j] - 48) * (b[i] - 48) + (res[index] - 48) + flag;
+			nbr = (a[j] - 48) * (b[i] - 48) + ((*res)[index] - 48) + flag;
 			flag = nbr / 10;
-			res[index--] = (nbr % 10) + 48;
+			(*res)[index--] = (nbr % 10) + 48;
 			j--;
 		}
-		res[index] += flag;
+		(*res)[index] += flag;
 		i--;
 	}
-	return (res);
+	ft_strdel(&a);
+	ft_strdel(&b);
 }
 
 char	*multiplication(char *a, char *b, unsigned len_a, unsigned len_b)
@@ -46,22 +47,23 @@ char	*multiplication(char *a, char *b, unsigned len_a, unsigned len_b)
 	char		*tmp;
 	unsigned	len;
 
-	if (*a == ZERO || *b == ZERO)
-		return (char_to_string(ZERO));
-	len = len_a + len_b;
-	result = (char*)malloc(len + 1);
-	result[len] = 0;
-	ft_memset(result, '0', len);
-	if (len_a < len_b)
-		swap(&a, &b);
-	result = do_mult(a, b, result, MAX(len_a, len_b) - 1, MIN(len_a, len_b) - 1);
+	if (*a != ZERO && *b != ZERO)
+	{
+		len = len_a + len_b;
+		result = ft_strnew(len + 1);
+		ft_memset(result, '0', len);
+		if (len_a < len_b)
+			swap(&a, &b);
+		do_mult(a, b, &result, MAX(len_a, len_b) - 1, MIN(len_a, len_b) - 1);
+		if (*result == '0')
+		{
+			tmp = ft_strdup(result + 1);
+			free(result);
+			return (tmp);
+		}
+		return (result);
+	}
 	ft_strdel(&a);
 	ft_strdel(&b);
-	if (*result == '0')
-	{
-		tmp = ft_strdup(result + 1);
-		free(result);
-		return (tmp);
-	}
-	return (result);
+	return (char_to_string(ZERO));
 }

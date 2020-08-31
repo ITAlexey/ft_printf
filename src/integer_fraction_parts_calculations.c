@@ -43,35 +43,17 @@ char 	*powered_value_of_base_five(int exp)
 }
 
 
-char	*powered_by_ten(char *nbr, int exp)
-{
-	char 	*tmp;
-	char 	*zeros;
-
-	tmp = nbr;
-	zeros = ft_strnew(exp);
-	ISNULL(zeros);
-	ft_memset(zeros, '0', exp);
-	nbr = ft_strjoin(nbr, zeros);
-	ISNULL(nbr);
-	ft_strdel(&tmp);
-	ft_strdel(&zeros);
-	return (nbr);
-}
-
 char 	*do_power(int exp, int max_exp, char*(*pow_raise)(int))
 {
 	char	*result;
 	char 	*powered_nbr;
 
 	result = ft_strdup("1");
-	while (exp > max_exp)
+	while (exp >= 0)
 	{
-		powered_nbr = ft_strdup(pow_raise(max_exp));
+		powered_nbr = exp > max_exp ? ft_strdup(pow_raise(max_exp)) : ft_strdup(pow_raise(exp));
 		result = multiplication(result, powered_nbr, ft_strlen(result), ft_strlen(powered_nbr));
 		exp -= max_exp;
 	}
-	powered_nbr = ft_strdup(pow_raise(exp));
-	result = multiplication(result, powered_nbr, ft_strlen(result), ft_strlen(powered_nbr));
 	return (result);
 }
