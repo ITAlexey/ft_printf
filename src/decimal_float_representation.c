@@ -8,7 +8,7 @@ static char 	*combine_nbr(t_data_format *data, char *int_part, char *fract_part,
 {
 	char	*result;
 
-	//round_nbr(&int_part, &fract_part, data->precision);
+	round_nbr(&int_part, &fract_part, data->precision);
 	int_part = sign ? add_prefix(int_part, "-") : int_part;
 	if (data->flag->hash || data->precision)
 		int_part = add_suffix(int_part, ".");
@@ -92,7 +92,8 @@ char 	*convert_fraction_to_decimal(char *b_fract, int exp)
 	char 	*powered_nbr;
 	int 	len;
 
-	skip_zero_bits(&b_fract, &exp);
+	if (*b_fract != '\0')
+		skip_zero_bits(&b_fract, &exp);
 	len = get_len(b_fract, exp);
 	decimal_form = initialize_nbr(len, exp--);
 	while (*b_fract != '\0')

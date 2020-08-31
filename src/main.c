@@ -6,7 +6,7 @@
 #include "ft_printf.h"
 
 int 	main(void){
-	long double k = 321321.000000000000003;
+	long double k = 3213222222222222222222222222222222222222222222221.00003;
 	//char *p = "hello programmers!";
 	//printf("---My function---\n");
 	printf("\nmy = %d\n", ft_printf("%Lf", k));
