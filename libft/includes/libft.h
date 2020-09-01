@@ -20,7 +20,7 @@
 # define ABC(c) ((c) < 0 ? -(c) : (c))
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define MIN(a, b) ((a) <= (b) ? (a) : (b))
-# define ISNULL(pointer) if ((pointer) == NULL) return (pointer)
+# define ISNULL(pointer) if ((pointer) == NULL) return (NULL)
 # define TRUE 1
 # define FALSE 0
 # define BUFF_SIZE 17
@@ -32,6 +32,8 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				*add_prefix(char *str, char *pattern);
+char				*add_suffix(char *str, char *pattern);
 char				*char_to_string(char ch);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -103,5 +105,6 @@ size_t				ft_count_words(const char *str, int c);
 int					get_next_line(int const fd, char **line);
 char				*nbr_to_string(long long nbr);
 char				*reverse_string(char *str);
-char 				*ft_uitoa_base(unsigned long long n, unsigned base);
+char				*ft_uitoa_base(unsigned long long n, unsigned base);
+
 #endif

@@ -1,9 +1,19 @@
-//
-// Created by alexey on 10.08.2020.
-//
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshala <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/15 13:10:00 by dshala            #+#    #+#             */
+/*   Updated: 2020/08/15 15:07:37 by dshala           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int		get_nbr_of_percentages(char const **format)
+#include "ft_printf.h"
+#define TYPE_PATTERN "cspdiouxXf"
+
+static int			get_nbr_of_percentages(char const **format)
 {
 	int		percent_counter;
 
@@ -16,30 +26,11 @@ static int		get_nbr_of_percentages(char const **format)
 	return (percent_counter);
 }
 
-int 	get_numeric_value(const char **format, int(*fun)(int), int symbol)
+static t_spec		get_specifier(char const **format)
 {
-	int 	len;
-	char 	*end;
-	char 	*res;
+	t_spec	specifier;
 
-	end = (char*)(*format);
-	len = 0;
-	while (fun(**format))
-	{
-		(*format)++;
-		len++;
-	}
-	res = (len == 0 ? char_to_string(symbol) : ft_strsub(end, 0, len));
-	len = ft_atoi(res);
-	free(res);
-	return (len);
-}
-
-static short 	get_specifier(char const **format)
-{
-	short	specifier;
-
-	specifier = FALSE;
+	specifier = NONE;
 	if (**format == 'l' || **format == 'h' || **format == 'L')
 	{
 		if (**format == 'l' && *(*format + 1) == 'l')
@@ -57,7 +48,7 @@ static short 	get_specifier(char const **format)
 	return (specifier);
 }
 
-static char 	get_type(char const **format, char *pattern)
+static char			get_type(char const **format, char *pattern)
 {
 	while (*pattern != '\0')
 	{
@@ -71,7 +62,7 @@ static char 	get_type(char const **format, char *pattern)
 	return (*pattern);
 }
 
-static int 		get_precision(char const **format)
+static int			get_precision(char const **format)
 {
 	short	is_dot;
 
@@ -81,16 +72,17 @@ static int 		get_precision(char const **format)
 	return (is_dot ? get_numeric_value(format, ft_isdigit, ZERO) : 6);
 }
 
-int			parse_format(char const **format, t_data_format *data, va_list ap)
+int					parse_format(char const **format, t_data_format *data,
+				va_list ap)
 {
 	data->percentages = get_nbr_of_percentages(format);
 	if (data->percentages % 2 != 0)
 	{
-		data->flag = get_flags(format, is_matched_to_flag);
+		data->flag = get_flags(format);
 		data->width = get_numeric_value(format, ft_isdigit, ZERO);
 		data->precision = get_precision(format);
 		data->specifier = get_specifier(format);
-		data->type = get_type(format, "cspdiouxXf");
+		data->type = get_type(format, TYPE_PATTERN);
 	}
 	return (generate_output(data, ap));
 }

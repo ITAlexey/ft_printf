@@ -1,6 +1,14 @@
-//
-// Created by alexey on 15.08.2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   record_flags.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshala <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/15 13:10:00 by dshala            #+#    #+#             */
+/*   Updated: 2020/08/15 15:07:37 by dshala           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -10,7 +18,7 @@ static int		record_flag(short *value)
 	return (TRUE);
 }
 
-int		is_matched_to_flag(char ch, t_flag *flag)
+static int		is_matched_to_flag(char ch, t_flag *flag)
 {
 	if (ch == PLUS)
 		return (record_flag(&(flag->pos)));
@@ -26,7 +34,7 @@ int		is_matched_to_flag(char ch, t_flag *flag)
 		return (FALSE);
 }
 
-static void 	init(t_flag *tmp)
+static void		init(t_flag *tmp)
 {
 	tmp->pos = FALSE;
 	tmp->neg = FALSE;
@@ -35,7 +43,7 @@ static void 	init(t_flag *tmp)
 	tmp->space = FALSE;
 }
 
-t_flag		*get_flags(char const **format, int(*fun)(char, t_flag*))
+t_flag			*get_flags(char const **format)
 {
 	t_flag	*tmp;
 
@@ -43,7 +51,7 @@ t_flag		*get_flags(char const **format, int(*fun)(char, t_flag*))
 	if (tmp == NULL)
 		exit(12);
 	init(tmp);
-	while (fun(**format, tmp))
+	while (is_matched_to_flag(**format, tmp))
 		(*format)++;
 	return (tmp);
 }

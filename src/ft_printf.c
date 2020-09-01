@@ -1,40 +1,37 @@
-//
-// Created by alexey on 10.08.2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshala <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/15 13:10:00 by dshala            #+#    #+#             */
+/*   Updated: 2020/08/15 15:07:37 by dshala           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char 	*add_prefix(char *arg, char *pattern)
+int			get_numeric_value(const char **format, int (*fun)(int), int symbol)
 {
-	char	*tmp;
+	int		len;
+	char	*end;
+	char	*res;
 
-	tmp = arg;
-	arg = ft_strjoin(pattern, arg);
-	free(tmp);
-	return (arg);
+	end = (char*)(*format);
+	len = 0;
+	while (fun(**format))
+	{
+		(*format)++;
+		len++;
+	}
+	res = (len == 0 ? char_to_string(symbol) : ft_strsub(end, 0, len));
+	len = ft_atoi(res);
+	free(res);
+	return (len);
 }
 
-char 	*add_suffix(char *arg, char *pattern)
-{
-	char *tmp;
-
-	tmp = arg;
-	arg = ft_strjoin(arg, pattern);
-	free(tmp);
-	return (arg);
-}
-
-short		is_oXx(char ch)
-{
-	return ((ch == 'x' || ch == 'X' || ch == 'o') ? 1 : 0);
-}
-
-short	is_difp(char ch)
-{
-	return ((ch == 'd' || ch == 'i' || ch == 'f' || ch == 'p') ? TRUE : FALSE);
-}
-
-int 		print_signs(int times, int sign)
+int			print_signs(int times, int sign)
 {
 	int	tmp;
 
@@ -47,11 +44,11 @@ int 		print_signs(int times, int sign)
 	return (times);
 }
 
-int 			ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list			ap;
 	t_data_format	*data;
-	int 			res;
+	int				res;
 
 	res = 0;
 	if (!(data = (t_data_format*)malloc(sizeof(t_data_format))))
@@ -72,6 +69,3 @@ int 			ft_printf(const char *format, ...)
 	va_end(ap);
 	return (res);
 }
-
-
-

@@ -1,10 +1,18 @@
-//
-// Created by alexey on 27.08.2020.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   multiplication.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshala <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/15 13:10:00 by dshala            #+#    #+#             */
+/*   Updated: 2020/08/15 15:07:37 by dshala           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		swap(char **a, char **b)
+static void	swap(char **a, char **b)
 {
 	char *tmp;
 
@@ -13,7 +21,7 @@ static void		swap(char **a, char **b)
 	*b = tmp;
 }
 
-static void		do_mult(char *a, char *b, char **res, unsigned len_a, unsigned len_b)
+static void	do_mult(char *a, char *b, char **res)
 {
 	char		nbr;
 	int			index;
@@ -21,10 +29,10 @@ static void		do_mult(char *a, char *b, char **res, unsigned len_a, unsigned len_
 	int			j;
 	short		flag;
 
-	i = len_b;
+	i = ft_strlen(b) - 1;
 	while (i >= 0)
 	{
-		j = len_a;
+		j = ft_strlen(a) - 1;
 		index = i + j + 1;
 		flag = 0;
 		while (j >= 0)
@@ -41,7 +49,7 @@ static void		do_mult(char *a, char *b, char **res, unsigned len_a, unsigned len_
 	ft_strdel(&b);
 }
 
-char	*multiplication(char *a, char *b, unsigned len_a, unsigned len_b)
+char		*multiplication(char *a, char *b, unsigned len_a, unsigned len_b)
 {
 	char		*result;
 	char		*tmp;
@@ -54,7 +62,7 @@ char	*multiplication(char *a, char *b, unsigned len_a, unsigned len_b)
 		ft_memset(result, '0', len);
 		if (len_a < len_b)
 			swap(&a, &b);
-		do_mult(a, b, &result, MAX(len_a, len_b) - 1, MIN(len_a, len_b) - 1);
+		do_mult(a, b, &result);
 		if (*result == '0')
 		{
 			tmp = ft_strdup(result + 1);

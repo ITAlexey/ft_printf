@@ -1,4 +1,4 @@
-NAME = printf
+NAME = libftprintf.a
 
 SRC = ft_printf \
 		parsing \
@@ -6,12 +6,11 @@ SRC = ft_printf \
 		parsing_types \
 		record_flags \
 		integer_fraction_parts_calculations \
-		round_nbr \
+		apply_modifiers \
+		convert_fraction_to_decimal \
 		decimal_float_representation \
-		parse_type_f \
 		sum \
 		multiplication \
-		main
 
 VPATH = src
 
@@ -21,7 +20,7 @@ OBJ = $(addsuffix .o, $(addprefix $(OBJ_DIR)/, $(SRC)))
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 
 LIB = libft/libft.a
 
@@ -30,23 +29,26 @@ INC = includes
 all: $(NAME)
 
 $(NAME): obj_dir $(LIB) $(OBJ)
-		$(CC) $(OBJ) -L$(dir $(LIB)) -lft -o $(NAME)
+		@ar rc $@ $(OBJ)
+		@echo "\033[32mft_printf has compiled!\033[32m"
+		@ranlib $@
 
-$(OBJ_DIR)/%.o: %.c $(INC) libft/includes
-		$(CC) $(CFLAGS) -o $@ -c $< -I$(INC) -I$(addsuffix $(INC), $(dir $(LIB)))
+$(OBJ_DIR)/%.o: %.c $(INC)
+		@$(CC) $(CFLAGS) -o $@ -c $< -I$(INC) -I$(addsuffix $(INC), $(dir $(LIB)))
 
 obj_dir:
-		mkdir -p $(OBJ_DIR)
+		@mkdir -p $(OBJ_DIR)
 
 $(LIB): 
-		make -sC $(dir $(LIB))
-
+		@make -sC $(dir $(LIB))
 
 clean:
-		rm -rf $(OBJ_DIR)
+		@make clean -C $(dir $(LIB))
+		@rm -rf $(OBJ_DIR)
 
 fclean: clean
-		rm -rf $(NAME)
+		@make fclean -C $(dir $(LIB))
+		@rm -rf $(NAME)
 
 re: fclean all
 
