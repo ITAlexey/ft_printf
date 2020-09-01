@@ -135,8 +135,8 @@ int 	generate_output(t_data_format *data, va_list ap)
 		data->arg = retrieve_according_type(data, ap);
 		apply_modifiers(data, data->flag, data->type, data->width);
 		result = MAX(data->width, (int) ft_strlen(data->arg));
-		free(data->flag);
 		free(data->arg);
 	}
+	free(data->flag);
 	return (print_signs(data->percentages / 2, PERCENT) + result);
 }

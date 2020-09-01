@@ -92,6 +92,8 @@ char 	*convert_fraction_to_decimal(char *b_fract, int exp)
 	char 	*powered_nbr;
 	int 	len;
 
+	if (!ft_strchr(b_fract, '1'))
+		return (ft_strnew(1));
 	if (*b_fract != '\0')
 		skip_zero_bits(&b_fract, &exp);
 	len = get_len(b_fract, exp);
