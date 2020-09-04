@@ -103,7 +103,7 @@ void			apply_modifiers(t_data_format *data, t_flag *flag,
 	len = (int)ft_strlen(data->arg);
 	diff = len - width;
 	if (ft_strchr("diufpoXx", type))
-		no_char_or_string_type(data, flag, diff, type);
+		no_char_or_string_type(data, flag, type, diff);
 	else
 	{
 		if (diff < 0)
